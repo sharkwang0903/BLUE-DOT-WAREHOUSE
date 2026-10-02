@@ -2,16 +2,18 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#111917">
   <meta name="description" content="藍點倉庫 — 八個房間，一顆藍點。極簡像素推箱子。">
   <title>藍點倉庫 · 公司展示版</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mobile.css">
   <script defer src="engine.js"></script>
   <script defer src="levels.js"></script>
   <script defer src="solutions.js"></script>
   <script defer src="game.js"></script>
+  <script defer src="mobile.js"></script>
 </head>
 <body>
   <div class="shell">
@@ -26,6 +28,10 @@
     </header>
 
     <main class="game-layout">
+      <div class="mobile-toolbar">
+        <div><span class="micro-label muted">LOGIC CHALLENGE</span><h1 id="mobile-room">01 · 初光</h1></div>
+        <button id="mobile-menu" type="button" aria-haspopup="dialog" aria-controls="mobile-panel">關卡 / 道具 <span id="mobile-count">PPA ×3</span></button>
+      </div>
       <section class="play-section" aria-label="遊戲區">
         <div class="stage-topline">
           <span class="micro-label">ROOM <span id="room-number">01</span><span class="muted"> / 08</span></span>
@@ -91,9 +97,24 @@
         </div>
         <div class="keyboard-strip" aria-label="方向鍵或 WASD 移動"><span class="arrows">↑<br>← ↓ →</span><span class="key-divider"></span><span>W A S D</span></div>
       </aside>
+      <section class="touch-controls" aria-label="觸控操作">
+        <button id="mobile-undo" type="button" class="touch-action" aria-label="撤銷上一步">↶<span>撤銷</span></button>
+        <div class="dpad" role="group" aria-label="十字方向鍵">
+          <button id="move-up" class="dpad-key up" type="button" aria-label="向上移動">↑</button>
+          <button id="move-left" class="dpad-key left" type="button" aria-label="向左移動">←</button>
+          <span class="dpad-center" aria-hidden="true"><img src="icon.svg" width="24" height="24" alt=""></span>
+          <button id="move-right" class="dpad-key right" type="button" aria-label="向右移動">→</button>
+          <button id="move-down" class="dpad-key down" type="button" aria-label="向下移動">↓</button>
+        </div>
+        <button id="mobile-restart" type="button" class="touch-action" aria-label="重開本關">↻<span>重開</span></button>
+        <p class="touch-help" id="mobile-stats">000 步 · 000 次推箱</p>
+      </section>
     </main>
     <footer class="footer"><span>LESS SPACE. MORE THOUGHT.</span><span>01—08 <span class="footer-square" aria-hidden="true"></span></span></footer>
   </div>
+  <dialog id="mobile-panel" class="item-dialog mobile-panel" aria-labelledby="mobile-panel-title">
+    <div class="dialog-topline"><h2 id="mobile-panel-title" class="micro-label">關卡 / 道具與紀錄</h2><button id="mobile-panel-close" class="dialog-close" type="button" aria-label="關閉關卡與道具" autofocus>×</button></div>
+  </dialog>
   <dialog id="ppa-dialog" class="item-dialog" aria-labelledby="ppa-dialog-title" aria-describedby="ppa-description">
     <div class="dialog-topline"><span class="micro-label">ITEM GUIDE / 道具說明</span><button id="ppa-close" class="dialog-close" type="button" aria-label="關閉道具說明" autofocus>×</button></div>
     <div class="dialog-product"><img src="ppa.svg" width="60" height="80" alt="白色像素 PPA 噴劑"><div><span class="micro-label muted">A LITTLE HELP.</span><h2 id="ppa-dialog-title">PPA 乳霜</h2><p>回復年輕 · 自動破關</p></div></div>

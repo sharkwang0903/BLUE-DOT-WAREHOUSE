@@ -116,6 +116,12 @@
     $('best').textContent = bests[current] ? `${bests[current].pushes} / ${bests[current].steps}` : '—';
     $('best').title = bests[current] ? `${bests[current].pushes} 次推箱，${bests[current].steps} 步` : '尚未通關';
     $('undo').disabled = !!autopilot || record.assisted || record.history.length === 0;
+    $('mobile-undo').disabled = $('undo').disabled;
+    $('mobile-restart').disabled = !!autopilot;
+    for (const id of ['move-up', 'move-right', 'move-down', 'move-left']) $(id).disabled = !!autopilot || complete;
+    $('mobile-room').textContent = `${String(current + 1).padStart(2, '0')} · ${level.name}`;
+    $('mobile-count').textContent = `PPA ×${ppaCount}`;
+    $('mobile-stats').textContent = autopilot ? 'PPA 解題中 · 請觀看演示' : `${number(record.steps)} 步 · ${number(record.pushes)} 次推箱`;
     $('restart').disabled = !!autopilot;
     $('replay').disabled = !!autopilot;
     $('next').disabled = !!autopilot;
@@ -174,12 +180,14 @@
   }
   function selectRoom(i) {
     if (autopilot || i < 0 || i > unlocked) return;
+    if ($('mobile-panel').open) $('mobile-panel').close();
     hideClear(); current = i; facing = 1; held = null; animation = null; particles = [];
     syncUI(); persist(); draw(performance.now()); sound('room'); canvas.focus({ preventScroll: true });
     if (E.won(levels[current], records[current].state)) showClear();
   }
   function restart() {
     if (autopilot) return;
+    if ($('mobile-panel').open) $('mobile-panel').close();
     hideClear(); records[current] = fresh(levels[current]);
     held = null; animation = null; particles = []; facing = 1;
     syncUI(); persist(); draw(performance.now()); sound('undo'); canvas.focus({ preventScroll: true });
@@ -241,6 +249,7 @@
     let moves;
     try { moves = solutionMoves(levels[current]); }
     catch (_) { itemMessage = '本關解法尚未準備好，乳霜未扣除。'; syncUI(); return; }
+    if ($('mobile-panel').open) $('mobile-panel').close();
     hideClear(); ppaCount--; records[current] = fresh(levels[current]);
     records[current].assisted = true;
     autopilot = { moves, cursor: 0, next: performance.now() + 700 };
@@ -417,7 +426,7 @@
   }
   const bindings = { ArrowUp: 0, w: 0, ArrowRight: 1, d: 1, ArrowDown: 2, s: 2, ArrowLeft: 3, a: 3 };
   document.addEventListener('keydown', event => {
-    if ($('ppa-dialog').open) return;
+    if ($('ppa-dialog').open || $('mobile-panel').open) return;
     if (event.ctrlKey || event.metaKey || event.altKey) return;
     const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
     if (autopilot && (Object.hasOwn(bindings, key) || ['z', 'r', 'Enter'].includes(key))) { event.preventDefault(); return; }
@@ -442,6 +451,41 @@
   $('undo').addEventListener('click', undo); $('restart').addEventListener('click', restart);
   $('replay').addEventListener('click', restart); $('next').addEventListener('click', nextRoom);
   $('sound').addEventListener('click', toggleSound);
+  $('mobile-undo').addEventListener('click', undo);
+  $('mobile-restart').addEventListener('click', restart);
+  $('mobile-menu').addEventListener('click', () => {
+    held = null; $('mobile-panel').showModal();
+  });
+  $('mobile-panel-close').addEventListener('click', () => $('mobile-panel').close());
+  $('mobile-panel').addEventListener('close', () => { held = null; });
+  // Pointer capture stops a held direction even when the finger leaves the button.
+  let touchPointer = null;
+  const directionButtons = ['move-up', 'move-right', 'move-down', 'move-left'].map($);
+  function releaseTouch(event) {
+    if (!touchPointer || event && event.pointerId !== touchPointer.id) return;
+    touchPointer.button.classList.remove('is-held');
+    touchPointer = null;
+    if (held && held.key === 'touch') held = null;
+  }
+  directionButtons.forEach((button, dir) => {
+    button.addEventListener('pointerdown', event => {
+      if (event.button !== 0 || button.disabled || touchPointer || $('ppa-dialog').open || $('mobile-panel').open) return;
+      event.preventDefault();
+      const now = performance.now();
+      touchPointer = { id: event.pointerId, button };
+      button.setPointerCapture(event.pointerId); button.classList.add('is-held');
+      held = { key: 'touch', dir, next: now + 260 };
+      tryMove(dir, now);
+    });
+    for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) button.addEventListener(type, releaseTouch);
+    // Keyboard/screen-reader activation has detail 0; pointer clicks already moved on pointerdown.
+    button.addEventListener('click', event => {
+      if (event.detail === 0 && !button.disabled && !$('ppa-dialog').open && !$('mobile-panel').open) tryMove(dir);
+    });
+    button.addEventListener('contextmenu', event => event.preventDefault());
+  });
+  window.addEventListener('blur', () => releaseTouch());
+  document.addEventListener('visibilitychange', () => { if (document.hidden) releaseTouch(); });
   $('ppa-use').addEventListener('click', usePpa);
   $('ppa-info').addEventListener('click', () => {
     held = null;
@@ -456,7 +500,7 @@
   });
   canvas.addEventListener('pointerdown', () => canvas.focus({ preventScroll: true }));
   function tick(now) {
-    if (!document.hidden && !$('ppa-dialog').open) {
+    if (!document.hidden && !$('ppa-dialog').open && !$('mobile-panel').open) {
       if (autopilot && now >= autopilot.next && (!animation || now >= animation.until)) {
         if (autopilot.cursor < autopilot.moves.length) {
           tryMove(autopilot.moves[autopilot.cursor++], now, true);

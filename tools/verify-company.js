@@ -18,11 +18,12 @@ function boot(storage = new Map(), reduced = false, changeSolutions) {
     const handlers = {}, attributes = {}, children = [];
     return {
       textContent: '', innerHTML: '', hidden: true, open: false, disabled: false, width: 288, height: 288,
-      dataset: {}, classList: { toggle() {} }, children,
+      dataset: {}, classList: { toggle() {}, add() {}, remove() {} }, children,
       setAttribute(k, v) { attributes[k] = v; }, getAttribute(k) { return attributes[k]; },
       append(child) { children.push(child); }, replaceChildren(...items) { children.splice(0, children.length, ...items); },
       addEventListener(k, fn) { handlers[k] = fn; },
-      click() { if (!this.disabled && handlers.click) handlers.click(); },
+      click() { if (!this.disabled && handlers.click) handlers.click({ detail: 0 }); },
+      emit(type, event) { if (handlers[type]) handlers[type](event); }, setPointerCapture() {},
       showModal() { this.open = true; }, close() { this.open = false; if (handlers.close) handlers.close(); },
       querySelector() { return get('info-label'); }, getContext() { return context; }, focus() {}
     };
@@ -61,6 +62,29 @@ function boot(storage = new Map(), reduced = false, changeSolutions) {
 }
 
 const storage = new Map([[originalKey, 'original-save-untouched']]);
+const touch = boot();
+const pointer = id => ({ button: 0, pointerId: id, preventDefault() {} });
+touch.get('move-right').emit('pointerdown', pointer(1));
+assert.equal(touch.read().records[0].steps, 1, 'Touch press moves immediately.');
+touch.get('move-down').emit('pointerdown', pointer(2));
+assert.equal(touch.read().records[0].steps, 1, 'A second finger cannot change the held direction.');
+touch.advance(300); assert.equal(touch.read().records[0].steps, 2, 'Holding a direction repeats.');
+touch.get('move-right').emit('pointercancel', pointer(1));
+touch.advance(200);
+touch.get('move-down').emit('pointerdown', pointer(3));
+touch.get('move-down').emit('pointerup', pointer(3));
+const stopped = touch.read(); touch.advance(500);
+assert.deepEqual(touch.read(), stopped, 'Releasing stops repetition.');
+touch.get('mobile-undo').click(); assert.equal(touch.read().records[0].steps, 2);
+touch.get('mobile-restart').click(); assert.equal(touch.read().records[0].steps, 0);
+touch.get('mobile-menu').click(); touch.press('ArrowRight');
+assert.equal(touch.read().records[0].steps, 0, 'Mobile panel blocks keyboard movement.');
+touch.get('ppa-use').click();
+assert.equal(touch.get('mobile-panel').open, false, 'PPA use closes the panel to show the board.');
+assert.equal(touch.get('move-right').disabled, true);
+touch.get('move-right').emit('pointerdown', pointer(4));
+assert.equal(touch.read().records[0].steps, 0, 'Touch movement is locked during PPA.');
+touch.finish();
 let app = boot(storage);
 assert.equal(app.get('ppa-count').textContent, 3);
 app.get('ppa-info').click(); assert.equal(app.get('ppa-dialog').open, true);
@@ -120,4 +144,4 @@ const interrupted = boot(); interrupted.get('ppa-use').click(); interrupted.adva
 const recovered = boot(interrupted.storage, false, entries => { entries[0].fingerprint = 'outdated'; });
 assert.equal(recovered.read().ppaCount, 3, 'Invalid interrupted solution refunds the item.');
 assert.equal(recovered.get('restart').disabled, false);
-console.log('PASS: Eight animated PPA solutions, reduced motion, input lock, reset, refresh resume, inventory, manual rewards, undo protection, replay, bests, original save isolation, empty inventory and invalid-solution recovery.');
+console.log('PASS: Touch press/hold/release/cancel, multiple pointers, mobile actions/panel, eight animated PPA solutions, reduced motion, input lock, reset, refresh resume, inventory, manual rewards, undo protection, replay, bests, original save isolation, empty inventory and invalid-solution recovery.');
