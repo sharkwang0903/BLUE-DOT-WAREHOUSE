@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111917">
+  <meta name="description" content="藍點倉庫 — 八個房間，一顆藍點。極簡像素推箱子。">
+  <title>藍點倉庫 · BLUE DOT</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="engine.js"></script>
+  <script defer src="levels.js"></script>
+  <script defer src="game.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead">
+      <a class="brand" href="./index.html" aria-label="藍點倉庫首頁">
+        <img src="icon.svg" width="28" height="28" alt="">
+        <span>BLUE DOT<span class="brand-divider">/</span>WAREHOUSE</span>
+      </a>
+      <button id="sound" class="sound-switch" type="button" aria-label="關閉音效" aria-pressed="true">
+        <span class="sound-led" aria-hidden="true"></span><span id="sound-label">SOUND ON</span>
+      </button>
+    </header>
+
+    <main class="game-layout">
+      <section class="play-section" aria-label="遊戲區">
+        <div class="stage-topline">
+          <span class="micro-label">ROOM <span id="room-number">01</span><span class="muted"> / 08</span></span>
+          <span class="micro-label stage-status"><span class="status-dot" aria-hidden="true"></span><span id="stage-status">IN PROGRESS</span></span>
+        </div>
+        <div class="stage-frame" id="stage-frame">
+          <span class="frame-corner corner-tl" aria-hidden="true"></span>
+          <span class="frame-corner corner-tr" aria-hidden="true"></span>
+          <span class="frame-corner corner-bl" aria-hidden="true"></span>
+          <span class="frame-corner corner-br" aria-hidden="true"></span>
+          <canvas id="board" width="288" height="288" tabindex="0" role="application" aria-label="推箱子遊戲棋盤"></canvas>
+          <div class="completion" id="completion" hidden>
+            <div class="completion-mark" aria-hidden="true">✦</div>
+            <p class="completion-eyebrow" id="completion-eyebrow">ROOM CLEAR</p>
+            <h2 id="completion-title">房間已清空</h2>
+            <p id="completion-detail"></p>
+            <button type="button" id="next" class="next-button">下一個房間 <span aria-hidden="true">→</span></button>
+            <button type="button" id="replay" class="replay-button">再走一次</button>
+          </div>
+        </div>
+        <div class="stage-bottomline">
+          <span id="coordinates" class="micro-label muted">6 × 6</span>
+          <span class="micro-label muted">NO HINTS. JUST YOU.</span>
+        </div>
+      </section>
+
+      <aside class="dashboard" aria-label="關卡與紀錄">
+        <div class="title-block">
+          <span class="edition micro-label">A SMALL PUZZLE GAME</span>
+          <canvas id="wordmark" width="168" height="63" aria-hidden="true"></canvas>
+          <h1>藍點倉庫</h1>
+          <p class="tagline">八個房間。沒有捷徑。</p>
+        </div>
+        <div class="room-identity">
+          <span class="micro-label muted" id="room-codename">FIRST LIGHT</span>
+          <h2 id="room-name">初光</h2>
+          <div id="goal-dots" class="goal-dots" aria-label="目標完成進度"></div>
+        </div>
+        <div class="stats">
+          <div><span class="stat-label">步數 <span>STEPS</span></span><strong id="steps">000</strong></div>
+          <div><span class="stat-label">推箱 <span>PUSHES</span></span><strong id="pushes">000</strong></div>
+        </div>
+        <div class="record-line"><span>最佳推箱</span><span id="best">—</span></div>
+        <nav class="rooms" aria-label="選擇房間">
+          <div class="rooms-caption micro-label"><span>THE EIGHT ROOMS</span><span id="progress">0 / 8</span></div>
+          <div class="room-grid" id="room-grid"></div>
+        </nav>
+        <div class="actions">
+          <button type="button" id="undo" class="action-button" aria-label="撤銷上一步，Z"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3 2 7l4 4M2 7h7a4 4 0 0 1 0 8"/></svg><span>撤銷</span><kbd>Z</kbd></button>
+          <button type="button" id="restart" class="action-button" aria-label="重開本關，R"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 5A6 6 0 1 0 14 9M13 1v4H9"/></svg><span>重開</span><kbd>R</kbd></button>
+        </div>
+        <div class="keyboard-strip" aria-label="方向鍵或 WASD 移動"><span class="arrows">↑<br>← ↓ →</span><span class="key-divider"></span><span>W A S D</span></div>
+      </aside>
+    </main>
+    <footer class="footer"><span>LESS SPACE. MORE THOUGHT.</span><span>01—08 <span class="footer-square" aria-hidden="true"></span></span></footer>
+  </div>
+  <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+  <noscript>請啟用 JavaScript 以遊玩藍點倉庫。</noscript>
+</body>
+</html>
