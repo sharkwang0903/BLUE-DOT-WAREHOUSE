@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111917">
   <meta name="description" content="藍點倉庫 — 八個房間，一顆藍點。極簡像素推箱子。">
-  <title>藍點倉庫 · BLUE DOT</title>
+  <title>藍點倉庫 · 公司展示版</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <script defer src="engine.js"></script>
   <script defer src="levels.js"></script>
+  <script defer src="solutions.js"></script>
   <script defer src="game.js"></script>
 </head>
 <body>
@@ -47,16 +48,16 @@
         </div>
         <div class="stage-bottomline">
           <span id="coordinates" class="micro-label muted">6 × 6</span>
-          <span class="micro-label muted">NO HINTS. JUST YOU.</span>
+          <span class="micro-label muted">THINK DEEP. A LITTLE HELP.</span>
         </div>
       </section>
 
       <aside class="dashboard" aria-label="關卡與紀錄">
         <div class="title-block">
-          <span class="edition micro-label">A SMALL PUZZLE GAME</span>
-          <canvas id="wordmark" width="168" height="63" aria-hidden="true"></canvas>
+          <span class="edition micro-label">COMPANY DEMO / LOGIC CHALLENGE</span>
+          <canvas id="wordmark" width="224" height="28" aria-hidden="true"></canvas>
           <h1>藍點倉庫</h1>
-          <p class="tagline">八個房間。沒有捷徑。</p>
+          <p class="tagline">八個房間。挑戰思考的深度。</p>
         </div>
         <div class="room-identity">
           <span class="micro-label muted" id="room-codename">FIRST LIGHT</span>
@@ -68,6 +69,18 @@
           <div><span class="stat-label">推箱 <span>PUSHES</span></span><strong id="pushes">000</strong></div>
         </div>
         <div class="record-line"><span>最佳推箱</span><span id="best">—</span></div>
+        <section class="inventory" aria-label="解題道具">
+          <div class="inventory-heading"><span class="micro-label">解題道具 / ITEMS</span><span class="item-count">持有 <strong id="ppa-count">3</strong> 罐</span></div>
+          <div class="item-card">
+            <button id="ppa-info" class="item-info" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ppa-dialog" aria-label="查看 PPA 乳霜效果說明">
+              <img src="ppa.svg" width="48" height="64" alt="白色像素噴劑，標示 PPA">
+              <span><strong>PPA 乳霜</strong><small>回復年輕 · 自動破關</small><span class="item-info-label">效果說明 ↗</span></span>
+            </button>
+            <button id="ppa-use" class="item-use" type="button">使用乳霜 · 自動破關 <span aria-hidden="true">→</span></button>
+          </div>
+          <p class="item-rule">初始贈送 3 罐 · 自行破關再得 1 罐</p>
+          <p id="ppa-status" class="item-status" role="status" aria-live="polite">卡關時，給思考一點幫助。</p>
+        </section>
         <nav class="rooms" aria-label="選擇房間">
           <div class="rooms-caption micro-label"><span>THE EIGHT ROOMS</span><span id="progress">0 / 8</span></div>
           <div class="room-grid" id="room-grid"></div>
@@ -81,6 +94,13 @@
     </main>
     <footer class="footer"><span>LESS SPACE. MORE THOUGHT.</span><span>01—08 <span class="footer-square" aria-hidden="true"></span></span></footer>
   </div>
+  <dialog id="ppa-dialog" class="item-dialog" aria-labelledby="ppa-dialog-title" aria-describedby="ppa-description">
+    <div class="dialog-topline"><span class="micro-label">ITEM GUIDE / 道具說明</span><button id="ppa-close" class="dialog-close" type="button" aria-label="關閉道具說明" autofocus>×</button></div>
+    <div class="dialog-product"><img src="ppa.svg" width="60" height="80" alt="白色像素 PPA 噴劑"><div><span class="micro-label muted">A LITTLE HELP.</span><h2 id="ppa-dialog-title">PPA 乳霜</h2><p>回復年輕 · 自動破關</p></div></div>
+    <p id="ppa-description" class="item-description">淨膚年輕的乳霜，使用後可以直接回溯初始狀態（回復年輕），並且幫助玩家直接破關！</p>
+    <ul class="dialog-rules"><li>使用消耗 1 罐，棋盤回復本關起始狀態。</li><li>程式逐步演示到破關，期間無法操作。</li><li>首次遊玩送 3 罐，每次自行破關再得 1 罐。</li><li>道具通關會解鎖下一關，但不發道具獎勵，也不更新最佳紀錄。</li></ul>
+    <p class="dialog-footnote">關閉視窗後即可繼續遊戲 <kbd>ESC</kbd></p>
+  </dialog>
   <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
   <noscript>請啟用 JavaScript 以遊玩藍點倉庫。</noscript>
 </body>

@@ -1,4 +1,4 @@
-/* BLUE DOT — no dependencies, no network requests, no hidden hint system. */
+/* BLUE DOT company demo — offline item-assisted playback. */
 (function () {
   'use strict';
   const E = window.BlueBoxEngine;
@@ -6,7 +6,7 @@
   const $ = id => document.getElementById(id);
   const canvas = $('board'), ctx = canvas.getContext('2d', { alpha: false });
   const frame = $('stage-frame');
-  const storageKey = 'blue-dot-warehouse:v1';
+  const storageKey = 'blue-dot-warehouse:company:v1';
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const number = n => String(n).padStart(3, '0');
   const fingerprint = level => level.map.join('/') + JSON.stringify([level.player, level.boxes]);
@@ -19,23 +19,27 @@
     return new Set(positions).size === positions.length && positions.every(pos =>
       Number.isInteger(pos) && pos >= 0 && pos < level.tiles.length && level.tiles[pos] !== '#');
   }
-  function fresh(level) { return { state: E.copy(level.initial), steps: 0, pushes: 0, history: [] }; }
+  function fresh(level) { return { state: E.copy(level.initial), steps: 0, pushes: 0, history: [], assisted: false, rewarded: false }; }
   const records = levels.map((level, i) => {
     const r = saved && saved.records && saved.records[i];
     if (!r || r.fingerprint !== fingerprint(level) || !validState(level, r.state) ||
         !Number.isInteger(r.steps) || !Number.isInteger(r.pushes) || r.steps < 0 || r.pushes < 0 || r.pushes > r.steps ||
         !Array.isArray(r.history) || r.history.length !== r.steps ||
         !r.history.every(h => h && validState(level, h.state) && Number.isInteger(h.steps) && Number.isInteger(h.pushes))) return fresh(level);
-    return { state: E.copy(r.state), steps: r.steps, pushes: r.pushes, history: r.history };
+    return { state: E.copy(r.state), steps: r.steps, pushes: r.pushes, history: r.history, assisted: r.assisted === true, rewarded: r.rewarded === true };
   });
+  let ppaCount = saved && Number.isSafeInteger(saved.ppaCount) && saved.ppaCount >= 0 ? saved.ppaCount : 3;
+  let autopilot = null;
+  let itemMessage = '卡關時，給思考一點幫助。';
   const bests = levels.map((level, i) => {
     const b = saved && saved.bests && saved.bests[i];
     return b && b.fingerprint === fingerprint(level) && Number.isInteger(b.pushes) && Number.isInteger(b.steps) && b.pushes >= 0 && b.steps >= b.pushes
       ? { pushes: b.pushes, steps: b.steps } : null;
   });
+  const cleared = levels.map((level, i) => !!bests[i] || !!(saved && saved.cleared && saved.cleared[i] === fingerprint(level)));
   // Completion is a contiguous chain; corrupt storage cannot open a later room.
   let unlocked = 0;
-  while (unlocked < levels.length - 1 && bests[unlocked]) unlocked++;
+  while (unlocked < levels.length - 1 && cleared[unlocked]) unlocked++;
   let current = saved && Number.isInteger(saved.current) ? Math.max(0, Math.min(unlocked, saved.current)) : 0;
   let facing = 1, animation = null, particles = [], clearTimer = null;
   let held = null, audio = null, soundOn = !saved || saved.soundOn !== false;
@@ -58,7 +62,7 @@
   function persist() {
     try {
       localStorage.setItem(storageKey, JSON.stringify({
-        current, soundOn,
+        current, soundOn, ppaCount, cleared: cleared.map((done, i) => done ? fingerprint(levels[i]) : null),
         records: records.map((r, i) => ({ ...r, fingerprint: fingerprint(levels[i]) })),
         bests: bests.map((b, i) => b && ({ ...b, fingerprint: fingerprint(levels[i]) }))
       }));
@@ -106,23 +110,31 @@
     $('room-name').textContent = level.name;
     $('room-codename').textContent = level.codename;
     $('coordinates').textContent = `${level.width} × ${level.height}`;
-    $('stage-status').textContent = complete ? 'ROOM CLEAR' : 'IN PROGRESS';
+    $('stage-status').textContent = autopilot ? 'PPA AUTO PLAY' : complete ? 'ROOM CLEAR' : 'IN PROGRESS';
     $('steps').textContent = number(record.steps);
     $('pushes').textContent = number(record.pushes);
     $('best').textContent = bests[current] ? `${bests[current].pushes} / ${bests[current].steps}` : '—';
     $('best').title = bests[current] ? `${bests[current].pushes} 次推箱，${bests[current].steps} 步` : '尚未通關';
-    $('undo').disabled = record.history.length === 0;
-    $('progress').textContent = `${bests.filter(Boolean).length} / 8`;
+    $('undo').disabled = !!autopilot || record.assisted || record.history.length === 0;
+    $('restart').disabled = !!autopilot;
+    $('replay').disabled = !!autopilot;
+    $('next').disabled = !!autopilot;
+    $('ppa-count').textContent = ppaCount;
+    $('ppa-use').disabled = !!autopilot || ppaCount === 0 || complete;
+    $('ppa-status').textContent = autopilot ? `PPA 解題中 · ${record.steps} / ${autopilot.moves.length} 步，請觀看演示。` : itemMessage;
+    document.querySelector('.inventory').setAttribute('aria-busy', String(!!autopilot));
+    frame.classList.toggle('is-assisted', !!autopilot);
+    $('progress').textContent = `${cleared.filter(Boolean).length} / 8`;
     $('goal-dots').replaceChildren(...level.goals.map(pos => {
       const dot = document.createElement('span'); dot.className = 'goal-dot' + (state.boxes.includes(pos) ? ' filled' : '');
       dot.setAttribute('aria-hidden', 'true'); return dot;
     }));
     $('goal-dots').setAttribute('aria-label', `${filled} / ${level.goals.length} 個目標已完成`);
     roomButtons.forEach((button, i) => {
-      button.disabled = i > unlocked;
-      button.classList.toggle('complete', !!bests[i]);
+      button.disabled = !!autopilot || i > unlocked;
+      button.classList.toggle('complete', cleared[i]);
       button.setAttribute('aria-current', i === current ? 'true' : 'false');
-      button.setAttribute('aria-label', `房間 ${i + 1}：${levels[i].name}${i > unlocked ? '，尚未開啟' : bests[i] ? '，已通關' : ''}`);
+      button.setAttribute('aria-label', `房間 ${i + 1}：${levels[i].name}${i > unlocked ? '，尚未開啟' : cleared[i] ? '，已通關' : ''}`);
     });
     frame.classList.toggle('is-clear', complete);
     canvas.dataset.room = String(current + 1);
@@ -140,7 +152,7 @@
     const final = current === levels.length - 1;
     $('completion-eyebrow').textContent = final ? 'ALL EIGHT. ALL YOURS.' : 'ROOM CLEAR';
     $('completion-title').textContent = final ? '倉庫，安靜了。' : '房間已清空';
-    $('completion-detail').textContent = `${record.steps} 步  ·  ${record.pushes} 次推箱${final ? '  ·  8 / 8' : ''}`;
+    $('completion-detail').textContent = `${record.steps} 步  ·  ${record.pushes} 次推箱${final ? '  ·  8 / 8' : ''}${record.assisted ? '  ·  PPA 協助通關' : '  ·  自行破關，獲得 PPA 乳霜 ×1'}`;
     $('next').innerHTML = final ? '回到第一個房間 <span aria-hidden="true">↗</span>' : '下一個房間 <span aria-hidden="true">→</span>';
     $('completion').hidden = false;
     $('announcement').textContent = final ? '八個房間全部通關。' : `房間 ${current + 1} 通關。下一個房間已開啟。`;
@@ -148,25 +160,32 @@
   }
   function awardClear() {
     const record = records[current], old = bests[current];
-    if (!old || record.pushes < old.pushes || record.pushes === old.pushes && record.steps < old.steps) {
+    if (!record.assisted && (!old || record.pushes < old.pushes || record.pushes === old.pushes && record.steps < old.steps)) {
       bests[current] = { pushes: record.pushes, steps: record.steps };
     }
+    cleared[current] = true;
+    if (!record.assisted && !record.rewarded) {
+      ppaCount++; record.rewarded = true;
+      itemMessage = '自行破關！獲得 PPA 乳霜 ×1。';
+    } else if (record.assisted) itemMessage = 'PPA 協助通關完成。本次不發道具獎勵。';
     unlocked = Math.max(unlocked, Math.min(levels.length - 1, current + 1));
     held = null; persist();
     clearTimer = setTimeout(() => { showClear(); sound('win'); }, reducedMotion ? 0 : 470);
   }
   function selectRoom(i) {
-    if (i < 0 || i > unlocked) return;
+    if (autopilot || i < 0 || i > unlocked) return;
     hideClear(); current = i; facing = 1; held = null; animation = null; particles = [];
     syncUI(); persist(); draw(performance.now()); sound('room'); canvas.focus({ preventScroll: true });
     if (E.won(levels[current], records[current].state)) showClear();
   }
   function restart() {
+    if (autopilot) return;
     hideClear(); records[current] = fresh(levels[current]);
     held = null; animation = null; particles = []; facing = 1;
     syncUI(); persist(); draw(performance.now()); sound('undo'); canvas.focus({ preventScroll: true });
   }
   function undo() {
+    if (autopilot || records[current].assisted) return;
     const record = records[current], previous = record.history.pop();
     if (!previous) return;
     hideClear(); record.state = previous.state; record.steps = previous.steps; record.pushes = previous.pushes;
@@ -180,7 +199,8 @@
       particles.push({ x: c.x + 16, y: c.y + 15, vx: Math.cos(angle) * (13 + i % 3 * 4), vy: Math.sin(angle) * 16, born: time });
     }
   }
-  function tryMove(direction, now = performance.now()) {
+  function tryMove(direction, now = performance.now(), automatic = false) {
+    if (autopilot && !automatic) return;
     const level = levels[current], record = records[current];
     if (E.won(level, record.state) || animation && now < animation.until) return;
     facing = direction;
@@ -200,6 +220,54 @@
     if (E.gatesOpen(level, old.boxes) !== E.gatesOpen(level, result.state.boxes)) sound('gate');
     if (E.won(level, record.state)) awardClear();
     syncUI(); persist(); draw(now);
+  }
+
+  // Validate the full solution before consuming an item, including its level fingerprint.
+  function solutionMoves(level) {
+    const entry = window.BlueBoxSolutions && window.BlueBoxSolutions[current];
+    if (!entry || entry.fingerprint !== fingerprint(level)) throw new Error('Solution is out of date.');
+    const moves = [...entry.solution].map(key => E.DIRS.findIndex(dir => dir.key === key));
+    let state = E.copy(level.initial);
+    for (const dir of moves) {
+      const result = dir >= 0 && E.move(level, state, dir);
+      if (!result) throw new Error('Invalid solution.');
+      state = result.state;
+    }
+    if (!E.won(level, state)) throw new Error('Incomplete solution.');
+    return moves;
+  }
+  function usePpa() {
+    if (autopilot || ppaCount <= 0 || E.won(levels[current], records[current].state)) return;
+    let moves;
+    try { moves = solutionMoves(levels[current]); }
+    catch (_) { itemMessage = '本關解法尚未準備好，乳霜未扣除。'; syncUI(); return; }
+    hideClear(); ppaCount--; records[current] = fresh(levels[current]);
+    records[current].assisted = true;
+    autopilot = { moves, cursor: 0, next: performance.now() + 700 };
+    held = null; animation = null; particles = []; facing = 1;
+    $('announcement').textContent = '已使用 PPA 乳霜，回復關卡初始狀態。程式解題中，玩家操作暫停。';
+    syncUI(); persist(); draw(performance.now()); sound('room');
+  }
+  function resumePpa() {
+    const record = records[current];
+    if (!record.assisted || E.won(levels[current], record.state)) return;
+    try {
+      const moves = solutionMoves(levels[current]);
+      // Always reconstruct the trusted prefix when resuming after a refresh.
+      const steps = Math.min(record.steps, moves.length);
+      records[current] = fresh(levels[current]); records[current].assisted = true;
+      for (const dir of moves.slice(0, steps)) {
+        const r = records[current], result = E.move(levels[current], r.state, dir);
+        r.history.push({ state: E.copy(r.state), steps: r.steps, pushes: r.pushes });
+        r.state = result.state; r.steps++; if (result.pushed) r.pushes++;
+      }
+      autopilot = { moves, cursor: steps, next: performance.now() + 700 };
+    } catch (_) {
+      // A changed level/solution should leave the player able to play and refund the interrupted use.
+      records[current] = fresh(levels[current]); ppaCount++;
+      itemMessage = '解法已更新，中斷的乳霜已退回，請重新使用。';
+    }
+    persist();
   }
 
   // Each terrain cell is 32 real pixels. CSS only scales this tiny framebuffer.
@@ -339,19 +407,20 @@
     };
     const logo = $('wordmark'), c = logo.getContext('2d');
     c.clearRect(0, 0, logo.width, logo.height);
-    ['BLUE', 'DOT.'].forEach((text, line) => {
-      let x = 0;
-      for (const letter of text) {
-        c.fillStyle = line === 0 ? '#e8ead9' : '#64b5fc';
-        font[letter].forEach((row, y) => [...row].forEach((bit, dx) => { if (bit === '1') c.fillRect(x + dx * 4, line * 35 + y * 4, 4, 4); }));
+    let x = 0;
+    for (const letter of 'BLUE DOT.') {
+        if (letter === ' ') { x += 14; continue; }
+        c.fillStyle = x < 112 ? '#e8ead9' : '#64b5fc';
+        font[letter].forEach((row, y) => [...row].forEach((bit, dx) => { if (bit === '1') c.fillRect(x + dx * 4, y * 4, 4, 4); }));
         x += letter === '.' ? 8 : 28;
-      }
-    });
+    }
   }
   const bindings = { ArrowUp: 0, w: 0, ArrowRight: 1, d: 1, ArrowDown: 2, s: 2, ArrowLeft: 3, a: 3 };
   document.addEventListener('keydown', event => {
+    if ($('ppa-dialog').open) return;
     if (event.ctrlKey || event.metaKey || event.altKey) return;
     const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+    if (autopilot && (Object.hasOwn(bindings, key) || ['z', 'r', 'Enter'].includes(key))) { event.preventDefault(); return; }
     if (Object.hasOwn(bindings, key)) {
       event.preventDefault(); if (event.repeat) return;
       canvas.focus({ preventScroll: true });
@@ -373,15 +442,35 @@
   $('undo').addEventListener('click', undo); $('restart').addEventListener('click', restart);
   $('replay').addEventListener('click', restart); $('next').addEventListener('click', nextRoom);
   $('sound').addEventListener('click', toggleSound);
+  $('ppa-use').addEventListener('click', usePpa);
+  $('ppa-info').addEventListener('click', () => {
+    held = null;
+    $('ppa-dialog').showModal();
+    $('ppa-info').setAttribute('aria-expanded', 'true');
+  });
+  $('ppa-close').addEventListener('click', () => $('ppa-dialog').close());
+  $('ppa-dialog').addEventListener('close', () => {
+    held = null;
+    $('ppa-info').setAttribute('aria-expanded', 'false');
+    $('ppa-info').focus({ preventScroll: true });
+  });
   canvas.addEventListener('pointerdown', () => canvas.focus({ preventScroll: true }));
   function tick(now) {
-    if (!document.hidden) {
+    if (!document.hidden && !$('ppa-dialog').open) {
+      if (autopilot && now >= autopilot.next && (!animation || now >= animation.until)) {
+        if (autopilot.cursor < autopilot.moves.length) {
+          tryMove(autopilot.moves[autopilot.cursor++], now, true);
+          autopilot.next = Math.max(now + 220, animation ? animation.until + 90 : now + 220);
+        } else {
+          autopilot = null; held = null; syncUI(); persist();
+        }
+      }
       if (held && now >= held.next) { tryMove(held.dir, now); if (held) held.next = now + 115; }
       if (now - lastRender >= 32) { draw(now); lastRender = now; }
     }
     requestAnimationFrame(tick);
   }
-  drawWordmark(); updateSound(); syncUI(); draw(performance.now());
+  resumePpa(); drawWordmark(); updateSound(); syncUI(); draw(performance.now());
   if (E.won(levels[current], records[current].state)) showClear();
   requestAnimationFrame(tick);
 })();
