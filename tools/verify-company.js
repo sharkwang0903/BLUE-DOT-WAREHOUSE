@@ -7,6 +7,7 @@ const vm = require('node:vm');
 const E = require('../engine.js');
 const sources = require('../levels.js');
 const key = 'blue-dot-warehouse:company:v1';
+const lastRoom = sources.length - 1;
 const originalKey = 'blue-dot-warehouse:v1';
 const source = file => fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
 function boot(storage = new Map(), reduced = false, changeSolutions) {
@@ -25,7 +26,9 @@ function boot(storage = new Map(), reduced = false, changeSolutions) {
       click() { if (!this.disabled && handlers.click) handlers.click({ detail: 0 }); },
       emit(type, event) { if (handlers[type]) handlers[type](event); }, setPointerCapture() {},
       showModal() { this.open = true; }, close() { this.open = false; if (handlers.close) handlers.close(); },
-      querySelector() { return get('info-label'); }, getContext() { return context; }, focus() {}
+      querySelector() { return get('info-label'); }, getContext() { return context; },
+      focus() { document.activeElement = this; if (handlers.focus) handlers.focus(); },
+      closest(selector) { return selector === 'button' && [get('next'), get('replay')].includes(this) ? this : null; }
     };
   }
   function get(id) { if (!elements.has(id)) elements.set(id, element()); return elements.get(id); }
@@ -49,8 +52,8 @@ function boot(storage = new Map(), reduced = false, changeSolutions) {
     for (const [id, t] of [...timers]) if (t.at <= time) { timers.delete(id); t.fn(); }
   };
   const read = () => JSON.parse(storage.get(key));
-  const press = k => {
-    listeners.keydown({ key: k, repeat: false, preventDefault() {}, target: { closest() { return null; } } });
+  const press = (k, repeat = false) => {
+    listeners.keydown({ key: k, repeat, preventDefault() {}, target: document.activeElement || { closest() { return null; } } });
     listeners.keyup({ key: k });
   };
   const play = solution => {
@@ -58,10 +61,50 @@ function boot(storage = new Map(), reduced = false, changeSolutions) {
     advance();
   };
   const finish = () => { for (let i = 0; i < 300 && get('restart').disabled; i++) advance(); assert.equal(get('restart').disabled, false); advance(); };
-  return { get, read, press, play, finish, advance, storage, solutions: sandbox.window.BlueBoxSolutions };
+  return { get, read, press, play, finish, advance, storage, document, solutions: sandbox.window.BlueBoxSolutions };
 }
 
 const storage = new Map([[originalKey, 'original-save-untouched']]);
+const navigation = boot();
+navigation.play(navigation.solutions[0].solution);
+assert.equal(navigation.get('completion').hidden, false);
+assert.equal(navigation.document.activeElement, navigation.get('next'), 'Completion focuses the default choice.');
+const completed = navigation.read();
+navigation.press('ArrowDown');
+assert.equal(navigation.document.activeElement, navigation.get('replay'), 'Down selects replay.');
+navigation.press('ArrowDown', true);
+assert.equal(navigation.document.activeElement, navigation.get('replay'), 'Holding an arrow cannot skip choices.');
+navigation.advance();
+assert.deepEqual(navigation.read(), completed, 'Choice navigation cannot move the board or change the save.');
+navigation.press('Enter', true);
+assert.deepEqual(navigation.read(), completed, 'A repeated Enter cannot activate a choice.');
+navigation.press('Enter');
+assert.equal(navigation.read().current, 0, 'Enter on replay stays in the same room.');
+assert.equal(navigation.read().records[0].steps, 0, 'Enter on replay resets the room.');
+assert.equal(navigation.get('completion').hidden, true);
+assert.equal(navigation.document.activeElement, navigation.get('board'), 'Replay returns focus to the board.');
+navigation.play(navigation.solutions[0].solution);
+navigation.get('room-grid').children[0].click();
+assert.equal(navigation.document.activeElement, navigation.get('next'), 'Reopening a completed room resets the choice.');
+for (const arrow of ['ArrowUp', 'ArrowRight', 'ArrowLeft', 'ArrowDown']) {
+  navigation.press(arrow);
+  assert.equal(navigation.document.activeElement, navigation.get('replay'), `${arrow} reaches replay.`);
+  navigation.press(arrow);
+  assert.equal(navigation.document.activeElement, navigation.get('next'), `${arrow} wraps back to next.`);
+}
+navigation.get('replay').focus();
+navigation.press('Enter');
+assert.equal(navigation.read().records[0].steps, 0, 'Tab/native focus on replay also controls Enter.');
+navigation.play(navigation.solutions[0].solution);
+const restored = boot(navigation.storage);
+assert.equal(restored.document.activeElement, restored.get('next'), 'Restoring a completed save focuses next.');
+restored.press('s');
+restored.press('w');
+restored.press('Enter');
+assert.equal(restored.read().current, 1, 'WASD navigation and Enter can advance to the next room.');
+assert.equal(restored.get('completion').hidden, true);
+restored.press({ U: 'ArrowUp', R: 'ArrowRight', D: 'ArrowDown', L: 'ArrowLeft' }[restored.solutions[1].solution[0]]);
+assert.equal(restored.read().records[1].steps, 1, 'Direction keys resume normal movement after the menu closes.');
 const touch = boot();
 const pointer = id => ({ button: 0, pointerId: id, preventDefault() {} });
 touch.get('move-right').emit('pointerdown', pointer(1));
@@ -124,6 +167,26 @@ assert.equal(storage.get(originalKey), 'original-save-untouched');
 for (let i = 0; i < sources.length; i++) {
   if (i > 0) { app.get('next').click(); app.play(app.solutions[i].solution); }
   const saved = app.read();
+  assert.equal(app.get('progress').textContent, `${i + 1} / ${sources.length}`);
+  if (i === 7) {
+    // A real eight-room save must keep its records and inventory, and open room 9.
+    const legacy = { ...saved, current: 7, records: saved.records.slice(0, 8), bests: saved.bests.slice(0, 8), cleared: saved.cleared.slice(0, 8) };
+    const migrated = boot(new Map([[key, JSON.stringify(legacy)]]));
+    assert.equal(migrated.get('room-grid').children.length, 12);
+    assert.equal(migrated.get('progress').textContent, '8 / 12');
+    migrated.get('room-grid').children[7].click();
+    assert.equal(migrated.read().records.length, 12);
+    assert.deepEqual(migrated.read().records.slice(0, 8), legacy.records);
+    assert.deepEqual(migrated.read().bests.slice(0, 8), legacy.bests);
+    assert.deepEqual(migrated.read().cleared.slice(0, 8), legacy.cleared);
+    assert.equal(migrated.read().ppaCount, legacy.ppaCount);
+    assert.equal(migrated.get('room-grid').children[8].disabled, false);
+    assert.equal(migrated.get('room-grid').children[9].disabled, true);
+    assert.match(migrated.get('next').innerHTML, /下一個房間/);
+    migrated.press('Enter');
+    assert.equal(migrated.read().current, 8, 'The old final-room save continues into room 9.');
+    assert.deepEqual(migrated.read().records[8].state, E.parseLevel(sources[8]).initial);
+  }
   for (const reduced of [false, true]) {
     const copy = new Map([[key, JSON.stringify(saved)]]), test = boot(copy, reduced);
     test.get('restart').click(); test.get('ppa-use').click(); test.finish();
@@ -133,6 +196,15 @@ for (let i = 0; i < sources.length; i++) {
     assert.deepEqual(result.bests[i], saved.bests[i], 'PPA preserves manual bests.');
   }
 }
+
+app.press('ArrowDown');
+app.press('Enter');
+assert.equal(app.read().current, lastRoom, 'Replay also stays in the final room.');
+assert.equal(app.read().records[lastRoom].steps, 0);
+app.play(app.solutions[lastRoom].solution);
+assert.match(app.get('completion-detail').textContent, /12 \/ 12/);
+app.press('Enter');
+assert.equal(app.read().current, 0, 'The final room default choice returns to the first room.');
 
 let empty = boot(new Map([[key, JSON.stringify({ ppaCount: 0 })]]));
 assert.equal(empty.get('ppa-use').disabled, true); empty.get('ppa-use').click();
@@ -144,4 +216,4 @@ const interrupted = boot(); interrupted.get('ppa-use').click(); interrupted.adva
 const recovered = boot(interrupted.storage, false, entries => { entries[0].fingerprint = 'outdated'; });
 assert.equal(recovered.read().ppaCount, 3, 'Invalid interrupted solution refunds the item.');
 assert.equal(recovered.get('restart').disabled, false);
-console.log('PASS: Touch press/hold/release/cancel, multiple pointers, mobile actions/panel, eight animated PPA solutions, reduced motion, input lock, reset, refresh resume, inventory, manual rewards, undo protection, replay, bests, original save isolation, empty inventory and invalid-solution recovery.');
+console.log('PASS: Completion arrows/WASD, Enter, focus, repeat protection, completed-room reopen/restore, final-room choices, touch press/hold/release/cancel, multiple pointers, mobile actions/panel, twelve animated PPA solutions, eight-room save migration, reduced motion, input lock, reset, refresh resume, inventory, manual rewards, undo protection, replay, bests, original save isolation, empty inventory and invalid-solution recovery.');

@@ -6,6 +6,8 @@
   const $ = id => document.getElementById(id);
   const canvas = $('board'), ctx = canvas.getContext('2d', { alpha: false });
   const frame = $('stage-frame');
+  const clearChoices = [$('next'), $('replay')];
+  let clearChoice = 0;
   const storageKey = 'blue-dot-warehouse:company:v1';
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const number = n => String(n).padStart(3, '0');
@@ -130,7 +132,7 @@
     $('ppa-status').textContent = autopilot ? `PPA 解題中 · ${record.steps} / ${autopilot.moves.length} 步，請觀看演示。` : itemMessage;
     document.querySelector('.inventory').setAttribute('aria-busy', String(!!autopilot));
     frame.classList.toggle('is-assisted', !!autopilot);
-    $('progress').textContent = `${cleared.filter(Boolean).length} / 8`;
+    $('progress').textContent = `${cleared.filter(Boolean).length} / ${levels.length}`;
     $('goal-dots').replaceChildren(...level.goals.map(pos => {
       const dot = document.createElement('span'); dot.className = 'goal-dot' + (state.boxes.includes(pos) ? ' filled' : '');
       dot.setAttribute('aria-hidden', 'true'); return dot;
@@ -152,16 +154,26 @@
   function hideClear() {
     clearTimeout(clearTimer); clearTimer = null; $('completion').hidden = true;
   }
+  function selectClearChoice(index, focus = true) {
+    clearChoice = index;
+    clearChoices.forEach((button, i) => button.classList.toggle('is-selected', i === index));
+    if (focus) clearChoices[index].focus({ preventScroll: true });
+  }
+  clearChoices.forEach((button, i) => {
+    button.addEventListener('focus', () => selectClearChoice(i, false));
+  });
   function showClear() {
     const record = records[current];
     if (!E.won(levels[current], record.state)) return;
     const final = current === levels.length - 1;
-    $('completion-eyebrow').textContent = final ? 'ALL EIGHT. ALL YOURS.' : 'ROOM CLEAR';
+    $('completion-eyebrow').textContent = final ? 'ALL TWELVE. ALL YOURS.' : 'ROOM CLEAR';
     $('completion-title').textContent = final ? '倉庫，安靜了。' : '房間已清空';
-    $('completion-detail').textContent = `${record.steps} 步  ·  ${record.pushes} 次推箱${final ? '  ·  8 / 8' : ''}${record.assisted ? '  ·  PPA 協助通關' : '  ·  自行破關，獲得 PPA 乳霜 ×1'}`;
+    $('completion-detail').textContent = `${record.steps} 步  ·  ${record.pushes} 次推箱${final ? `  ·  ${levels.length} / ${levels.length}` : ''}${record.assisted ? '  ·  PPA 協助通關' : '  ·  自行破關，獲得 PPA 乳霜 ×1'}`;
     $('next').innerHTML = final ? '回到第一個房間 <span aria-hidden="true">↗</span>' : '下一個房間 <span aria-hidden="true">→</span>';
     $('completion').hidden = false;
-    $('announcement').textContent = final ? '八個房間全部通關。' : `房間 ${current + 1} 通關。下一個房間已開啟。`;
+    held = null;
+    selectClearChoice(0);
+    $('announcement').textContent = final ? `${levels.length} 個房間全部通關。` : `房間 ${current + 1} 通關。下一個房間已開啟。`;
     draw(performance.now());
   }
   function awardClear() {
@@ -430,6 +442,21 @@
     if (event.ctrlKey || event.metaKey || event.altKey) return;
     const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
     if (autopilot && (Object.hasOwn(bindings, key) || ['z', 'r', 'Enter'].includes(key))) { event.preventDefault(); return; }
+    if (!$('completion').hidden) {
+      if (Object.hasOwn(bindings, key)) {
+        event.preventDefault();
+        if (!event.repeat) {
+          const delta = bindings[key] === 0 || bindings[key] === 3 ? -1 : 1;
+          selectClearChoice((clearChoice + delta + clearChoices.length) % clearChoices.length);
+        }
+        return;
+      }
+      if (key === 'Enter' && (!event.target.closest('button') || clearChoices.includes(event.target.closest('button')))) {
+        event.preventDefault();
+        if (!event.repeat) clearChoices[clearChoice].click();
+        return;
+      }
+    }
     if (Object.hasOwn(bindings, key)) {
       event.preventDefault(); if (event.repeat) return;
       canvas.focus({ preventScroll: true });
@@ -437,7 +464,6 @@
       tryMove(bindings[key], now);
     } else if (key === 'z') { event.preventDefault(); if (!event.repeat) undo(); }
     else if (key === 'r') { event.preventDefault(); if (!event.repeat) restart(); }
-    else if (key === 'Enter' && !event.repeat && !event.target.closest('button') && !$('completion').hidden) { event.preventDefault(); nextRoom(); }
     else if (key === 'm' && !event.repeat) toggleSound();
   });
   document.addEventListener('keyup', event => {

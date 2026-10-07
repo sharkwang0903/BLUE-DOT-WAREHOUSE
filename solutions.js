@@ -31,5 +31,21 @@ window.BlueBoxSolutions = [
   {
     "fingerprint": "########/#  #~~~#/#  #   #/#     ##/# #. # #/#  ~ o.#/# .|   #/########[[6,2],[[2,2],[5,2],[2,3]]]",
     "solution": "LULDDDLDLLUURRLLUURDLDRLDDRRURUDLDRDRRULLUURUULDDDLDRDLLLUUURRDRURUULDDDULLLDDRDRRUDLLULUURRDDRDRRULLLUURDLDRDRRULLDLURUULLLDDRRRR"
+  },
+  {
+    "fingerprint": "########/##   # #/#   o~.#/#   #* #/##~|~~ #/#   .~##/##    ##/########[[4,5],[[2,2],[5,2],[2,5]]]",
+    "solution": "URURULDDLLULLURURDDDRDDLLUURUULLDRURDLDDDRRUURUULULLDDDDRRLLUURDULUURDLDDDRDRRUDLLURDRUURUULRDDLLLLUURDURLDDLDR"
+  },
+  {
+    "fingerprint": "########/#   ~~~#/#  #   #/#     ##/#~# ~#~#/#* ~ o.#/#~.|   #/########[[1,2],[[2,2],[5,2],[2,3]]]",
+    "solution": "URRRRRDLULDULLLDDRLUURRRDDUULLLDDRRDDRDRRULLULULLUURDLDRUURRDDUULLDDRDDRULULUURRDDLLLDDRDRRUULDRDRRULLULULUURRDDDLDLRRRDLL"
+  },
+  {
+    "fingerprint": "########/###  # #/#    ~ #/# | #*.#/##  o~~#/## . ~ #/##     #/########[[4,5],[[2,2],[5,2],[2,5]]]",
+    "solution": "URURULLULDDDRDDLLURDRULUULLURDRDDRRUUULULDDURRDDDLLLUDRRRUUULLDDUULLDRDRRRUULLDURRDDDDLLLUURRDRUURDLLLLDRRDRUURUULLULDDDRRDDRU"
+  },
+  {
+    "fingerprint": "########/# #  # #/#    ~ #/# ~~#*.#/##~~ ~|#/# ~o.~ #/##.  ###/########[[3,6],[[2,2],[3,2],[2,5],[4,4]]]",
+    "solution": "URRUUULULDDDLDRUUURRDDLLULLURDRDDDRURULRUULULDRRDDDLLLUULURRLDDRRLLUURDDRDRRUUULLULDRRRDDDLUURULLULDLDDRLDRURLDDRURUDLLURLLUURDDRDRURUULLULDDLDRRRDRULLLLDR"
   }
 ];

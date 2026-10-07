@@ -4124,5 +4124,3157 @@
         "wait": 125
       }
     ]
+  },
+  {
+    "room": 9,
+    "name": "穿針",
+    "size": "8x8",
+    "boxes": 3,
+    "minimumPushes": 22,
+    "replaySteps": 111,
+    "visitedStates": 2672,
+    "gateChanges": 4,
+    "distinctPlateHolders": 2,
+    "gateCrossings": 6,
+    "slides": 4,
+    "boxStops": 1,
+    "solution": "URURULDDLLULLURURDDDRDDLLUURUULLDRURDLDDDRRUURUULULLDDDDRRLLUURDULUURDLDDDRDRRUDLLURDRUURUULRDDLLLLUURDURLDDLDR",
+    "checkpoints": [
+      {
+        "key": "U",
+        "player": 36,
+        "boxes": "18,21,42",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 37,
+        "boxes": "18,21,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 29,
+        "boxes": "18,21,42",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 30,
+        "boxes": "18,21,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 22,
+        "boxes": "18,21,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 21,
+        "boxes": "18,20,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 29,
+        "boxes": "18,20,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 37,
+        "boxes": "18,20,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 36,
+        "boxes": "18,20,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "18,20,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 27,
+        "boxes": "18,20,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 26,
+        "boxes": "18,20,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 25,
+        "boxes": "18,20,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 17,
+        "boxes": "18,20,42",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 18,
+        "boxes": "19,20,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 10,
+        "boxes": "19,20,42",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 11,
+        "boxes": "19,20,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 19,
+        "boxes": "20,27,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "20,35,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "20,42,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 36,
+        "boxes": "20,42,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 44,
+        "boxes": "20,42,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 52,
+        "boxes": "20,42,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 51,
+        "boxes": "20,42,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 50,
+        "boxes": "20,42,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 42,
+        "boxes": "20,26,43",
+        "wait": 315
+      },
+      {
+        "key": "U",
+        "player": 34,
+        "boxes": "20,26,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 35,
+        "boxes": "20,26,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 27,
+        "boxes": "20,26,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 19,
+        "boxes": "20,26,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 18,
+        "boxes": "20,26,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 17,
+        "boxes": "20,26,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 25,
+        "boxes": "20,26,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 26,
+        "boxes": "20,27,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 18,
+        "boxes": "20,27,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 19,
+        "boxes": "20,27,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "20,35,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 26,
+        "boxes": "20,35,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 34,
+        "boxes": "20,35,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 42,
+        "boxes": "20,35,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 50,
+        "boxes": "20,35,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 51,
+        "boxes": "20,35,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 52,
+        "boxes": "20,35,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 44,
+        "boxes": "20,35,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 36,
+        "boxes": "20,35,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 37,
+        "boxes": "20,35,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 29,
+        "boxes": "20,35,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 21,
+        "boxes": "20,35,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 20,
+        "boxes": "19,35,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 12,
+        "boxes": "19,35,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 11,
+        "boxes": "19,35,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 10,
+        "boxes": "19,35,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 18,
+        "boxes": "19,35,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 26,
+        "boxes": "19,35,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 34,
+        "boxes": "19,35,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 42,
+        "boxes": "19,35,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 43,
+        "boxes": "19,35,44",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 44,
+        "boxes": "19,35,45",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 43,
+        "boxes": "19,35,45",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 42,
+        "boxes": "19,35,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 34,
+        "boxes": "19,35,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 26,
+        "boxes": "19,35,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 27,
+        "boxes": "19,35,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "19,43,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 27,
+        "boxes": "19,43,45",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 26,
+        "boxes": "19,43,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 18,
+        "boxes": "19,43,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 10,
+        "boxes": "19,43,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 11,
+        "boxes": "19,43,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 19,
+        "boxes": "27,43,45",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 18,
+        "boxes": "27,43,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 26,
+        "boxes": "27,43,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 34,
+        "boxes": "27,43,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 42,
+        "boxes": "27,43,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 43,
+        "boxes": "27,44,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 51,
+        "boxes": "27,44,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 52,
+        "boxes": "27,44,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 53,
+        "boxes": "27,44,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 45,
+        "boxes": "21,27,44",
+        "wait": 315
+      },
+      {
+        "key": "D",
+        "player": 53,
+        "boxes": "21,27,44",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 52,
+        "boxes": "21,27,44",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 51,
+        "boxes": "21,27,44",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 43,
+        "boxes": "21,27,44",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 44,
+        "boxes": "21,27,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 52,
+        "boxes": "21,27,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 53,
+        "boxes": "21,27,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 45,
+        "boxes": "21,27,29",
+        "wait": 315
+      },
+      {
+        "key": "U",
+        "player": 37,
+        "boxes": "21,27,29",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 38,
+        "boxes": "21,27,29",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 30,
+        "boxes": "21,27,29",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 22,
+        "boxes": "21,27,29",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 21,
+        "boxes": "20,27,29",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 22,
+        "boxes": "20,27,29",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 30,
+        "boxes": "20,27,29",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 38,
+        "boxes": "20,27,29",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 37,
+        "boxes": "20,27,29",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 36,
+        "boxes": "20,27,29",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "20,27,29",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 34,
+        "boxes": "20,27,29",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 26,
+        "boxes": "20,27,29",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 18,
+        "boxes": "20,27,29",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 19,
+        "boxes": "20,27,29",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "20,29,35",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 19,
+        "boxes": "20,29,35",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 20,
+        "boxes": "22,29,35",
+        "wait": 315
+      },
+      {
+        "key": "L",
+        "player": 19,
+        "boxes": "22,29,35",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "22,29,35",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "22,29,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 34,
+        "boxes": "22,29,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 42,
+        "boxes": "22,29,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 43,
+        "boxes": "22,29,44",
+        "wait": 125
+      }
+    ]
+  },
+  {
+    "room": 10,
+    "name": "返照",
+    "size": "8x8",
+    "boxes": 3,
+    "minimumPushes": 24,
+    "replaySteps": 122,
+    "visitedStates": 3522,
+    "gateChanges": 6,
+    "distinctPlateHolders": 3,
+    "gateCrossings": 2,
+    "slides": 7,
+    "boxStops": 0,
+    "solution": "URRRRRDLULDULLLDDRLUURRRDDUULLLDDRRDDRDRRULLULULLUURDLDRUURRDDUULLDDRDDRULULUURRDDLLLDDRDRRUULDRDRRULLULULUURRDDDLDLRRRDLL",
+    "checkpoints": [
+      {
+        "key": "U",
+        "player": 9,
+        "boxes": "18,21,26",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 10,
+        "boxes": "18,21,26",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 11,
+        "boxes": "18,21,26",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 12,
+        "boxes": "18,21,26",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 13,
+        "boxes": "18,21,26",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 14,
+        "boxes": "18,21,26",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 22,
+        "boxes": "18,21,26",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 21,
+        "boxes": "18,20,26",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 13,
+        "boxes": "18,20,26",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 12,
+        "boxes": "18,20,26",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 20,
+        "boxes": "18,26,28",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 12,
+        "boxes": "18,26,28",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 11,
+        "boxes": "18,26,28",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 10,
+        "boxes": "18,26,28",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 9,
+        "boxes": "18,26,28",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 17,
+        "boxes": "18,26,28",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 25,
+        "boxes": "18,26,28",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 26,
+        "boxes": "18,27,28",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 25,
+        "boxes": "18,27,28",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 17,
+        "boxes": "18,27,28",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 9,
+        "boxes": "18,27,28",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 10,
+        "boxes": "18,27,28",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 11,
+        "boxes": "18,27,28",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 12,
+        "boxes": "18,27,28",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 20,
+        "boxes": "18,27,28",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 28,
+        "boxes": "18,27,44",
+        "wait": 315
+      },
+      {
+        "key": "U",
+        "player": 20,
+        "boxes": "18,27,44",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 12,
+        "boxes": "18,27,44",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 11,
+        "boxes": "18,27,44",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 10,
+        "boxes": "18,27,44",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 9,
+        "boxes": "18,27,44",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 17,
+        "boxes": "18,27,44",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 25,
+        "boxes": "18,27,44",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 26,
+        "boxes": "18,27,44",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 27,
+        "boxes": "18,28,44",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "18,28,44",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 43,
+        "boxes": "18,28,44",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 44,
+        "boxes": "18,28,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 52,
+        "boxes": "18,28,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 53,
+        "boxes": "18,28,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 54,
+        "boxes": "18,28,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 46,
+        "boxes": "18,28,45",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 45,
+        "boxes": "18,28,44",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 44,
+        "boxes": "18,28,42",
+        "wait": 315
+      },
+      {
+        "key": "U",
+        "player": 36,
+        "boxes": "18,28,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "18,28,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 27,
+        "boxes": "18,28,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 26,
+        "boxes": "18,28,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 25,
+        "boxes": "18,28,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 17,
+        "boxes": "18,28,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 9,
+        "boxes": "18,28,42",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 10,
+        "boxes": "18,28,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 18,
+        "boxes": "26,28,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 17,
+        "boxes": "26,28,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 25,
+        "boxes": "26,28,42",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 26,
+        "boxes": "27,28,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 18,
+        "boxes": "27,28,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 10,
+        "boxes": "27,28,42",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 11,
+        "boxes": "27,28,42",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 12,
+        "boxes": "27,28,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 20,
+        "boxes": "27,28,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 28,
+        "boxes": "27,42,44",
+        "wait": 315
+      },
+      {
+        "key": "U",
+        "player": 20,
+        "boxes": "27,42,44",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 12,
+        "boxes": "27,42,44",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 11,
+        "boxes": "27,42,44",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 10,
+        "boxes": "27,42,44",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 18,
+        "boxes": "27,42,44",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 26,
+        "boxes": "27,42,44",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 27,
+        "boxes": "28,42,44",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "28,42,44",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 43,
+        "boxes": "28,42,44",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 44,
+        "boxes": "28,42,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 36,
+        "boxes": "28,42,45",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "28,42,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 27,
+        "boxes": "28,42,45",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 26,
+        "boxes": "28,42,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 18,
+        "boxes": "28,42,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 10,
+        "boxes": "28,42,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 11,
+        "boxes": "28,42,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 12,
+        "boxes": "28,42,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 20,
+        "boxes": "28,42,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 28,
+        "boxes": "42,44,45",
+        "wait": 315
+      },
+      {
+        "key": "L",
+        "player": 27,
+        "boxes": "42,44,45",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 26,
+        "boxes": "42,44,45",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 25,
+        "boxes": "42,44,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 33,
+        "boxes": "42,44,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 41,
+        "boxes": "42,44,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 42,
+        "boxes": "43,44,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 50,
+        "boxes": "43,44,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 51,
+        "boxes": "43,44,45",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 52,
+        "boxes": "43,44,45",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 44,
+        "boxes": "28,43,45",
+        "wait": 315
+      },
+      {
+        "key": "U",
+        "player": 36,
+        "boxes": "28,43,45",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "28,43,45",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 43,
+        "boxes": "28,45,51",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 44,
+        "boxes": "28,45,51",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 52,
+        "boxes": "28,45,51",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 53,
+        "boxes": "28,45,51",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 54,
+        "boxes": "28,45,51",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 46,
+        "boxes": "28,45,51",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 45,
+        "boxes": "28,44,51",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 44,
+        "boxes": "28,42,51",
+        "wait": 315
+      },
+      {
+        "key": "U",
+        "player": 36,
+        "boxes": "28,42,51",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "28,42,51",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 27,
+        "boxes": "28,42,51",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 26,
+        "boxes": "28,42,51",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 18,
+        "boxes": "28,42,51",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 10,
+        "boxes": "28,42,51",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 11,
+        "boxes": "28,42,51",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 12,
+        "boxes": "28,42,51",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 20,
+        "boxes": "28,42,51",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 28,
+        "boxes": "42,44,51",
+        "wait": 315
+      },
+      {
+        "key": "D",
+        "player": 36,
+        "boxes": "42,44,51",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "42,44,51",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 43,
+        "boxes": "42,44,51",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 42,
+        "boxes": "41,44,51",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 43,
+        "boxes": "41,44,51",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 44,
+        "boxes": "41,45,51",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 45,
+        "boxes": "41,46,51",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 53,
+        "boxes": "41,46,51",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 52,
+        "boxes": "41,46,51",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 51,
+        "boxes": "41,46,50",
+        "wait": 125
+      }
+    ]
+  },
+  {
+    "room": 11,
+    "name": "易位",
+    "size": "8x8",
+    "boxes": 3,
+    "minimumPushes": 29,
+    "replaySteps": 126,
+    "visitedStates": 2470,
+    "gateChanges": 4,
+    "distinctPlateHolders": 2,
+    "gateCrossings": 2,
+    "slides": 4,
+    "boxStops": 1,
+    "solution": "URURULLULDDDRDDLLURDRULUULLURDRDDRRUUULULDDURRDDDLLLUDRRRUUULLDDUULLDRDRRRUULLDURRDDDDLLLUURRDRUURDLLLLDRRDRUURUULLULDDDRRDDRU",
+    "checkpoints": [
+      {
+        "key": "U",
+        "player": 36,
+        "boxes": "18,21,42",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 37,
+        "boxes": "18,21,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 29,
+        "boxes": "18,21,42",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 30,
+        "boxes": "18,21,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 22,
+        "boxes": "18,21,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 21,
+        "boxes": "18,20,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 20,
+        "boxes": "18,19,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 12,
+        "boxes": "18,19,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 11,
+        "boxes": "18,19,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 19,
+        "boxes": "18,27,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "18,35,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "18,42,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 36,
+        "boxes": "18,42,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 44,
+        "boxes": "18,42,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 52,
+        "boxes": "18,42,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 51,
+        "boxes": "18,42,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 50,
+        "boxes": "18,42,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 42,
+        "boxes": "18,34,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 43,
+        "boxes": "18,34,44",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 51,
+        "boxes": "18,34,44",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 52,
+        "boxes": "18,34,44",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 44,
+        "boxes": "18,34,36",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 43,
+        "boxes": "18,34,36",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 35,
+        "boxes": "18,34,36",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 27,
+        "boxes": "18,34,36",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 26,
+        "boxes": "18,34,36",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 25,
+        "boxes": "18,34,36",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 17,
+        "boxes": "18,34,36",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 18,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 26,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 27,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 43,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 44,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 45,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 37,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 29,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 21,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 20,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 12,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 11,
+        "boxes": "19,34,36",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 19,
+        "boxes": "27,34,36",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "34,35,36",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 19,
+        "boxes": "34,35,36",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 20,
+        "boxes": "34,35,36",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 21,
+        "boxes": "34,35,36",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 29,
+        "boxes": "34,35,36",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 37,
+        "boxes": "34,35,36",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 45,
+        "boxes": "34,35,36",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 44,
+        "boxes": "34,35,36",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 43,
+        "boxes": "34,35,36",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 42,
+        "boxes": "34,35,36",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 34,
+        "boxes": "26,35,36",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 42,
+        "boxes": "26,35,36",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 43,
+        "boxes": "26,35,36",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 44,
+        "boxes": "26,35,36",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 45,
+        "boxes": "26,35,36",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 37,
+        "boxes": "26,35,36",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 29,
+        "boxes": "26,35,36",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 21,
+        "boxes": "26,35,36",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 20,
+        "boxes": "26,35,36",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 19,
+        "boxes": "26,35,36",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "26,35,36",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "26,36,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 27,
+        "boxes": "26,36,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 19,
+        "boxes": "26,36,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 18,
+        "boxes": "26,36,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 17,
+        "boxes": "26,36,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 25,
+        "boxes": "26,36,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 26,
+        "boxes": "27,36,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 34,
+        "boxes": "27,36,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 35,
+        "boxes": "27,36,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 36,
+        "boxes": "27,38,43",
+        "wait": 315
+      },
+      {
+        "key": "R",
+        "player": 37,
+        "boxes": "27,38,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 29,
+        "boxes": "27,38,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 21,
+        "boxes": "27,38,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 20,
+        "boxes": "27,38,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 19,
+        "boxes": "27,38,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 19,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 20,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 21,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 29,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 37,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 45,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 53,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 52,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 51,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 50,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 42,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 34,
+        "boxes": "35,38,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 35,
+        "boxes": "36,38,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 36,
+        "boxes": "37,38,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 44,
+        "boxes": "37,38,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 45,
+        "boxes": "37,38,43",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 37,
+        "boxes": "21,38,43",
+        "wait": 315
+      },
+      {
+        "key": "U",
+        "player": 29,
+        "boxes": "21,38,43",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 30,
+        "boxes": "21,38,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 38,
+        "boxes": "21,43,46",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 37,
+        "boxes": "21,43,46",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 36,
+        "boxes": "21,43,46",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "21,43,46",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 34,
+        "boxes": "21,43,46",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 42,
+        "boxes": "21,43,46",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 43,
+        "boxes": "21,44,46",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 44,
+        "boxes": "21,45,46",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 52,
+        "boxes": "21,45,46",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 53,
+        "boxes": "21,45,46",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 45,
+        "boxes": "21,29,46",
+        "wait": 315
+      },
+      {
+        "key": "U",
+        "player": 37,
+        "boxes": "21,29,46",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 38,
+        "boxes": "21,29,46",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 30,
+        "boxes": "21,29,46",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 22,
+        "boxes": "21,29,46",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 21,
+        "boxes": "20,29,46",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 20,
+        "boxes": "19,29,46",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 12,
+        "boxes": "19,29,46",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 11,
+        "boxes": "19,29,46",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 19,
+        "boxes": "27,29,46",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "29,35,46",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "29,43,46",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 36,
+        "boxes": "29,43,46",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 37,
+        "boxes": "29,43,46",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 45,
+        "boxes": "29,43,46",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 53,
+        "boxes": "29,43,46",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 54,
+        "boxes": "29,43,46",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 46,
+        "boxes": "29,30,43",
+        "wait": 315
+      }
+    ]
+  },
+  {
+    "room": 12,
+    "name": "終局",
+    "size": "8x8",
+    "boxes": 4,
+    "minimumPushes": 35,
+    "replaySteps": 155,
+    "visitedStates": 11816,
+    "gateChanges": 6,
+    "distinctPlateHolders": 2,
+    "gateCrossings": 2,
+    "slides": 10,
+    "boxStops": 2,
+    "solution": "URRUUULULDDDLDRUUURRDDLLULLURDRDDDRURULRUULULDRRDDDLLLUULURRLDDRRLLUURDDRDRRUUULLULDRRRDDDLUURULLULDLDDRLDRURLDDRURUDLLURLLUURDDRDRURUULLULDDLDRRRDRULLLLDR",
+    "checkpoints": [
+      {
+        "key": "U",
+        "player": 43,
+        "boxes": "18,19,36,42",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 44,
+        "boxes": "18,19,36,42",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 45,
+        "boxes": "18,19,36,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 37,
+        "boxes": "18,19,36,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 29,
+        "boxes": "18,19,36,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 21,
+        "boxes": "18,19,36,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 20,
+        "boxes": "18,19,36,42",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 12,
+        "boxes": "18,19,36,42",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 11,
+        "boxes": "18,19,36,42",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 19,
+        "boxes": "18,36,42,43",
+        "wait": 315
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "18,36,42,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "18,36,42,43",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 34,
+        "boxes": "18,36,42,43",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 42,
+        "boxes": "18,36,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 43,
+        "boxes": "18,36,44,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 35,
+        "boxes": "18,36,44,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 27,
+        "boxes": "18,36,44,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 19,
+        "boxes": "18,36,44,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 20,
+        "boxes": "18,36,44,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 21,
+        "boxes": "18,36,44,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 29,
+        "boxes": "18,36,44,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 37,
+        "boxes": "18,36,44,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 36,
+        "boxes": "18,34,44,50",
+        "wait": 315
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "18,34,44,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 27,
+        "boxes": "18,34,44,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 26,
+        "boxes": "18,34,44,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 25,
+        "boxes": "18,34,44,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 17,
+        "boxes": "18,34,44,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 18,
+        "boxes": "19,34,44,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 26,
+        "boxes": "19,34,44,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 27,
+        "boxes": "19,34,44,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "19,34,44,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 43,
+        "boxes": "19,34,44,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 51,
+        "boxes": "19,34,44,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 52,
+        "boxes": "19,34,44,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 44,
+        "boxes": "19,34,36,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 45,
+        "boxes": "19,34,36,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 37,
+        "boxes": "19,34,36,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 36,
+        "boxes": "19,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 37,
+        "boxes": "19,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 29,
+        "boxes": "19,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 21,
+        "boxes": "19,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 20,
+        "boxes": "19,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 12,
+        "boxes": "19,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 11,
+        "boxes": "19,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 19,
+        "boxes": "27,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 20,
+        "boxes": "27,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 21,
+        "boxes": "27,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 29,
+        "boxes": "27,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 37,
+        "boxes": "27,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 45,
+        "boxes": "27,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 44,
+        "boxes": "27,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 43,
+        "boxes": "27,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 42,
+        "boxes": "27,34,35,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 34,
+        "boxes": "18,27,35,50",
+        "wait": 315
+      },
+      {
+        "key": "U",
+        "player": 26,
+        "boxes": "18,27,35,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 25,
+        "boxes": "18,27,35,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 17,
+        "boxes": "18,27,35,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 18,
+        "boxes": "19,27,35,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 19,
+        "boxes": "20,27,35,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 18,
+        "boxes": "20,27,35,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 26,
+        "boxes": "20,27,35,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 34,
+        "boxes": "20,27,35,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 35,
+        "boxes": "20,27,36,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 36,
+        "boxes": "20,27,37,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "20,27,37,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 34,
+        "boxes": "20,27,37,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 26,
+        "boxes": "20,27,37,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 18,
+        "boxes": "20,27,37,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 19,
+        "boxes": "20,27,37,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "20,37,43,50",
+        "wait": 315
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "20,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 36,
+        "boxes": "20,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 44,
+        "boxes": "20,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 45,
+        "boxes": "20,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 46,
+        "boxes": "20,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 38,
+        "boxes": "20,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 30,
+        "boxes": "20,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 22,
+        "boxes": "20,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 21,
+        "boxes": "20,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 20,
+        "boxes": "19,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 12,
+        "boxes": "19,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 11,
+        "boxes": "19,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 19,
+        "boxes": "35,37,43,50",
+        "wait": 315
+      },
+      {
+        "key": "R",
+        "player": 20,
+        "boxes": "35,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 21,
+        "boxes": "35,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 22,
+        "boxes": "35,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 30,
+        "boxes": "35,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 38,
+        "boxes": "35,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 46,
+        "boxes": "35,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 45,
+        "boxes": "35,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 37,
+        "boxes": "21,35,43,50",
+        "wait": 315
+      },
+      {
+        "key": "U",
+        "player": 29,
+        "boxes": "21,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 30,
+        "boxes": "21,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 22,
+        "boxes": "21,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 21,
+        "boxes": "20,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 20,
+        "boxes": "19,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 12,
+        "boxes": "19,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 11,
+        "boxes": "19,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 19,
+        "boxes": "27,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 18,
+        "boxes": "27,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 26,
+        "boxes": "27,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 34,
+        "boxes": "27,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 35,
+        "boxes": "27,36,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 34,
+        "boxes": "27,36,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 42,
+        "boxes": "27,36,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 43,
+        "boxes": "27,36,44,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 35,
+        "boxes": "27,36,44,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 36,
+        "boxes": "27,37,44,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "27,37,44,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 43,
+        "boxes": "27,37,44,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 51,
+        "boxes": "27,37,44,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 52,
+        "boxes": "27,37,44,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 44,
+        "boxes": "27,36,37,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 45,
+        "boxes": "27,36,37,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 37,
+        "boxes": "21,27,36,50",
+        "wait": 315
+      },
+      {
+        "key": "D",
+        "player": 45,
+        "boxes": "21,27,36,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 44,
+        "boxes": "21,27,36,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 43,
+        "boxes": "21,27,36,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 35,
+        "boxes": "21,27,36,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 36,
+        "boxes": "21,27,37,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "21,27,37,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 34,
+        "boxes": "21,27,37,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 26,
+        "boxes": "21,27,37,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 18,
+        "boxes": "21,27,37,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 19,
+        "boxes": "21,27,37,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "21,37,43,50",
+        "wait": 315
+      },
+      {
+        "key": "D",
+        "player": 35,
+        "boxes": "21,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 36,
+        "boxes": "21,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 44,
+        "boxes": "21,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 45,
+        "boxes": "21,37,43,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 37,
+        "boxes": "21,29,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 38,
+        "boxes": "21,29,43,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 30,
+        "boxes": "21,29,43,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 22,
+        "boxes": "21,29,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 21,
+        "boxes": "20,29,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 20,
+        "boxes": "19,29,43,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 12,
+        "boxes": "19,29,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 11,
+        "boxes": "19,29,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 19,
+        "boxes": "29,35,43,50",
+        "wait": 315
+      },
+      {
+        "key": "D",
+        "player": 27,
+        "boxes": "29,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 26,
+        "boxes": "29,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 34,
+        "boxes": "29,35,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 35,
+        "boxes": "29,36,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 36,
+        "boxes": "29,38,43,50",
+        "wait": 315
+      },
+      {
+        "key": "R",
+        "player": 37,
+        "boxes": "29,38,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 45,
+        "boxes": "29,38,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 46,
+        "boxes": "29,38,43,50",
+        "wait": 125
+      },
+      {
+        "key": "U",
+        "player": 38,
+        "boxes": "29,30,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 37,
+        "boxes": "29,30,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 36,
+        "boxes": "29,30,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 35,
+        "boxes": "29,30,43,50",
+        "wait": 125
+      },
+      {
+        "key": "L",
+        "player": 34,
+        "boxes": "29,30,43,50",
+        "wait": 125
+      },
+      {
+        "key": "D",
+        "player": 42,
+        "boxes": "29,30,43,50",
+        "wait": 125
+      },
+      {
+        "key": "R",
+        "player": 43,
+        "boxes": "29,30,44,50",
+        "wait": 125
+      }
+    ]
   }
 ]

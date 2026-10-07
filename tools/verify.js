@@ -5,7 +5,8 @@ const E = require('../engine.js');
 const sources = require('../levels.js');
 const { solve, expandSolution } = require('./solver.js');
 
-assert.equal(sources.length, 8);
+assert.equal(sources.length, 12);
+assert.deepEqual(sources.map(source => source.id), Array.from({ length: 12 }, (_, i) => i + 1));
 const report = [];
 for (const source of sources) {
   const level = E.parseLevel(source), result = solve(level, 1000000);
@@ -48,6 +49,19 @@ for (const source of sources) {
     assert.equal(withoutGate.solved, false, 'The gate must be essential.');
   }
   if (level.tiles.some(tile => tile === '~' || tile === '*')) assert.ok(slides > 0, 'Ice must be used.');
+  if (source.id >= 9) {
+    assert.ok(level.gates.length && level.tiles.some(tile => tile === '~' || tile === '*'), 'Every new room combines ice and gates.');
+    assert.ok(slides >= 3, 'Mixed rooms must use ice repeatedly.');
+    if (source.id <= 11) assert.ok(pushes >= 21 && pushes <= 29, 'Rooms 9–11 match the late-game difficulty band.');
+    else {
+      assert.equal(level.goals.length, 4, 'The final room coordinates four boxes.');
+      assert.ok(pushes >= 33 && pushes <= 38 && stops >= 2, 'The boss combines a long plan with deliberate box brakes.');
+    }
+    // Check that the ice changes the puzzle, rather than decorating unused floor.
+    const dry = solve(E.parseLevel({ ...source, map: source.map.map(row => row.replaceAll('~', ' ').replaceAll('*', '.')) }), 1000000);
+    assert.ok(!dry.exhausted, 'The dry-room comparison must finish its search.');
+    assert.ok(!dry.solved || dry.minimum !== pushes, 'Removing the ice must change the solution requirements.');
+  }
   const row = { room: source.id, name: source.name, size: `${level.width}x${level.height}`, boxes: level.goals.length,
     minimumPushes: pushes, replaySteps: solution.length, visitedStates: result.visited, gateChanges, distinctPlateHolders: holders.size,
     gateCrossings, slides, boxStops: stops, solution, checkpoints };
@@ -68,4 +82,4 @@ assert.equal(E.move(gateRoom, { player: 10, boxes:[17,11] }, 1).state.player, 11
 assert.equal(E.move(gateRoom, { player: 11, boxes:[17,12] }, 2).state.player, 19, 'A player inside a closing gate can leave.');
 assert.equal(E.move(slideRoom, { player: 9, boxes:[18] }, 0), null, 'Wall bumps are ignored.');
 fs.writeFileSync(__dirname + '/verification.json', JSON.stringify(report, null, 2));
-console.log('PASS: 8 exact solutions, full undo replay, essential circuits, ice, gate occupancy, walls.');
+console.log(`PASS: ${sources.length} exact solutions, full undo replay, essential circuits, ice, gate occupancy, walls.`);
