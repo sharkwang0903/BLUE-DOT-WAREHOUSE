@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#111917">
-  <meta name="description" content="藍點倉庫 — 十二個房間，一顆藍點。極簡像素推箱子。">
+  <meta name="description" content="藍點倉庫 — 十六個房間，一顆藍點。冰面、閘門與轉向冰板的像素推箱子。">
   <title>藍點倉庫 · 公司展示版</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
@@ -34,7 +34,7 @@
       </div>
       <section class="play-section" aria-label="遊戲區">
         <div class="stage-topline">
-          <span class="micro-label">ROOM <span id="room-number">01</span><span class="muted"> / 12</span></span>
+          <span class="micro-label">ROOM <span id="room-number">01</span><span class="muted"> / 16</span></span>
           <span class="micro-label stage-status"><span class="status-dot" aria-hidden="true"></span><span id="stage-status">IN PROGRESS</span></span>
         </div>
         <div class="stage-frame" id="stage-frame">
@@ -57,6 +57,7 @@
           <span id="coordinates" class="micro-label muted">6 × 6</span>
           <span class="micro-label muted">THINK DEEP. A LITTLE HELP.</span>
         </div>
+        <p id="mechanism-guide" class="mechanism-guide" hidden><span class="turn-left">↶ 左轉 90°</span> · <span class="turn-right">↷ 右轉 90°</span><br>箱子進入後轉向滑行，遇阻擋或普通地面停下。玩家正常行走。</p>
       </section>
 
       <aside class="dashboard" aria-label="關卡與紀錄">
@@ -64,7 +65,7 @@
           <span class="edition micro-label">COMPANY DEMO / LOGIC CHALLENGE</span>
           <canvas id="wordmark" width="224" height="28" aria-hidden="true"></canvas>
           <h1>藍點倉庫</h1>
-          <p class="tagline">十二個房間。挑戰思考的深度。</p>
+          <p class="tagline">十六個房間。挑戰思考的深度。</p>
         </div>
         <div class="room-identity">
           <span class="micro-label muted" id="room-codename">FIRST LIGHT</span>
@@ -89,7 +90,7 @@
           <p id="ppa-status" class="item-status" role="status" aria-live="polite">卡關時，給思考一點幫助。</p>
         </section>
         <nav class="rooms" aria-label="選擇房間">
-          <div class="rooms-caption micro-label"><span>THE TWELVE ROOMS</span><span id="progress">0 / 12</span></div>
+          <div class="rooms-caption micro-label"><span>THE SIXTEEN ROOMS</span><span id="progress">0 / 16</span></div>
           <div class="room-grid" id="room-grid"></div>
         </nav>
         <div class="actions">
@@ -111,7 +112,7 @@
         <p class="touch-help" id="mobile-stats">000 步 · 000 次推箱</p>
       </section>
     </main>
-    <footer class="footer"><span>LESS SPACE. MORE THOUGHT.</span><span>01—12 <span class="footer-square" aria-hidden="true"></span></span></footer>
+    <footer class="footer"><span>LESS SPACE. MORE THOUGHT.</span><span>01—16 <span class="footer-square" aria-hidden="true"></span></span></footer>
   </div>
   <dialog id="mobile-panel" class="item-dialog mobile-panel" aria-labelledby="mobile-panel-title">
     <div class="dialog-topline"><h2 id="mobile-panel-title" class="micro-label">關卡 / 道具與紀錄</h2><button id="mobile-panel-close" class="dialog-close" type="button" aria-label="關閉關卡與道具" autofocus>×</button></div>

@@ -13,6 +13,7 @@
 @media(min-width:901px) and (max-height:850px){.shell{max-width:984px;padding:0 32px}.masthead{height:70px}.game-layout{grid-template-columns:minmax(0,1fr) 244px;gap:52px;padding:25px 0 20px}.play-section{max-width:calc(100vh - 222px)}.dashboard{padding-top:23px}.title-block #wordmark{width:180px;margin:10px 0}.title-block h1{font-size:21px}.tagline{margin-top:8px}.room-identity{margin-top:18px;padding-top:14px}.rooms{margin-top:18px}.keyboard-strip{margin-top:12px}.actions{margin-top:16px}.footer{padding:14px 0 17px}}
 
 /* Company edition: fit the board and the complete dashboard in one viewport. */
+.mechanism-guide{font-size:10px;line-height:1.7;color:var(--muted);margin:8px 0 0;letter-spacing:.2px}.mechanism-guide[hidden]{display:none}.turn-left{color:#f5d995}.turn-right{color:#d3f1f2}
 .shell{max-width:1100px;min-height:100svh;padding:0 32px;display:grid;grid-template-rows:56px 1fr 30px}
 .masthead{height:auto}.game-layout{grid-template-columns:minmax(0,1fr) 264px;gap:40px;padding:22px 0;align-items:center}
 .play-section{width:min(100%,calc(100svh - 160px));max-width:none;justify-self:center}.dashboard{padding:0}
@@ -33,3 +34,5 @@
 }
 @media(max-width:650px) and (max-height:740px){.stage-bottomline .micro-label:last-child{display:none}.completion-mark{display:none}.completion .completion-eyebrow{font-size:7px;letter-spacing:2px;margin-bottom:6px}.completion h2{font-size:16px;letter-spacing:2px}.completion #completion-detail{font-size:9px;line-height:1.5;margin:7px 8px}.completion-choice{width:176px;height:32px;min-height:32px;font-size:10px;padding:0 10px;gap:8px}.completion-choice+.completion-choice{margin-top:6px}.completion-help{font-size:9px;margin-top:8px}}
 @media(min-width:651px) and (max-height:680px){.edition,.keyboard-strip{display:none}.title-block #wordmark{margin:3px 0}.title-block h1{font-size:14px}.room-identity{margin-top:6px}.inventory{padding:6px 9px;margin-top:8px}.rooms{margin-top:8px}.actions{margin-top:8px}}
+.has-turns .play-section{width:min(100%,calc(100svh - 208px))}
+@media(min-width:651px) and (max-height:780px){.has-turns .play-section{width:min(100%,calc(100svh - 218px))}.room-grid{grid-template-columns:repeat(8,1fr)}}

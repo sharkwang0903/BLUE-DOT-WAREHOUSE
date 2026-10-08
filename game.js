@@ -111,6 +111,9 @@
     $('room-number').textContent = String(current + 1).padStart(2, '0');
     $('room-name').textContent = level.name;
     $('room-codename').textContent = level.codename;
+    const hasTurns = level.tiles.some((_, pos) => E.turnAt(level, pos));
+    $('mechanism-guide').hidden = !hasTurns;
+    document.querySelector('.shell').classList.toggle('has-turns', hasTurns);
     $('coordinates').textContent = `${level.width} × ${level.height}`;
     $('stage-status').textContent = autopilot ? 'PPA AUTO PLAY' : complete ? 'ROOM CLEAR' : 'IN PROGRESS';
     $('steps').textContent = number(record.steps);
@@ -166,7 +169,7 @@
     const record = records[current];
     if (!E.won(levels[current], record.state)) return;
     const final = current === levels.length - 1;
-    $('completion-eyebrow').textContent = final ? 'ALL TWELVE. ALL YOURS.' : 'ROOM CLEAR';
+    $('completion-eyebrow').textContent = final ? 'ALL SIXTEEN. ALL YOURS.' : 'ROOM CLEAR';
     $('completion-title').textContent = final ? '倉庫，安靜了。' : '房間已清空';
     $('completion-detail').textContent = `${record.steps} 步  ·  ${record.pushes} 次推箱${final ? `  ·  ${levels.length} / ${levels.length}` : ''}${record.assisted ? '  ·  PPA 協助通關' : '  ·  自行破關，獲得 PPA 乳霜 ×1'}`;
     $('next').innerHTML = final ? '回到第一個房間 <span aria-hidden="true">↗</span>' : '下一個房間 <span aria-hidden="true">→</span>';
@@ -232,7 +235,7 @@
     const old = record.state;
     record.history.push({ state: E.copy(old), steps: record.steps, pushes: record.pushes });
     record.state = result.state; record.steps++; if (result.pushed) record.pushes++;
-    const duration = reducedMotion ? 0 : result.path.length > 2 ? Math.min(300, 110 + result.path.length * 32) : result.pushed ? 110 : 82;
+    const duration = reducedMotion ? 0 : result.path.length > 2 ? Math.min(result.turns ? 560 : 300, 110 + result.path.length * 32) : result.pushed ? 110 : 82;
     animation = { from: old.player, to: result.state.player, boxFrom: result.from, boxTo: result.to, path: result.path, start: now, until: now + duration };
     if (result.pushed && level.goals.includes(result.to) && !level.goals.includes(result.from)) {
       burst(result.to, now); sound('goal');
@@ -345,6 +348,15 @@
     rect('#628e88', x + 10, y + 15, 4, 2); rect('#628e88', x + 17, y + 22, 5, 1);
     rect('#679b94', x + 21, y + 8 + pos % 3, 3, 1);
   }
+  function turningIce(x, y, turn) {
+    // Mirrored circular arrows express a relative turn from any entry direction.
+    const pixels = ['00111100','01100110','11000011','10000011','10001011','11001111','01100110','00100000'];
+    const color = turn > 0 ? '#d3f1f2' : '#f5d995';
+    rect('#29494d', x + 6, y + 6, 20, 20);
+    pixels.forEach((row, dy) => [...row].forEach((p, dx) => {
+      if (p === '1') rect(color, x + 8 + (turn > 0 ? dx : 7 - dx) * 2, y + 8 + dy * 2, 2, 2);
+    }));
+  }
   function box(x, y, done, onPlate) {
     rect('#15231b', x + 5, y + 8, 23, 23);
     rect(done ? '#496449' : colors.boxEdge, x + 5, y + 5, 22, 23);
@@ -387,6 +399,7 @@
       rect(colors.groundDark, x, y + 31, 32, 1); rect(colors.groundDark, x + 31, y, 1, 32);
       rect(colors.groundLight, x + 4 + pos * 3 % 21, y + 5 + pos * 7 % 19, 1, 1);
       if (E.isIce(level, pos)) ice(x, y, pos);
+      if (E.turnAt(level, pos)) turningIce(x, y, E.turnAt(level, pos));
       if (level.plates.includes(pos)) plate(x, y, state.boxes.includes(pos));
       if (level.goals.includes(pos)) target(x, y, state.boxes.includes(pos), time);
       if (tile === '|') gate(x, y, open, state.player === pos || state.boxes.includes(pos));

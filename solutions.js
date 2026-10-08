@@ -47,5 +47,21 @@ window.BlueBoxSolutions = [
   {
     "fingerprint": "########/# #  # #/#    ~ #/# ~~#*.#/##~~ ~|#/# ~o.~ #/##.  ###/########[[3,6],[[2,2],[3,2],[2,5],[4,4]]]",
     "solution": "URRUUULULDDDLDRUUURRDDLLULLURDRDDDRURULRUULULDRRDDDLLLUULURRLDDRRLLUURDDRDRRUUULLULDRRRDDDLUURULLULDLDDRLDRURLDDRURUDLLURLLUURDDRDRURUULLULDDLDRRRDRULLLLDR"
+  },
+  {
+    "fingerprint": "########/#.  l.##/# .##  #/# r    #/#l #l###/#  l   #/# ###  #/########[[6,3],[[5,2],[5,3],[4,4]]]",
+    "solution": "LLLLLUURDURRRDULLLDLDUURRRRDRDLLLLLDDRRRUDLLLUUUURDURRRDDLLLULURRRLLDDRRDDLLLUUUDDDRUDRRUUL"
+  },
+  {
+    "fingerprint": "########/#  #   #/# r  # #/# #  rl#/#r  # .#/# l rr.#/#  r #.#/########[[3,2],[[4,3],[2,4],[2,5]]]",
+    "solution": "DRULLLDDRLDDRRUUUDLLUURRDRRRUULLDLDRRLUURRDULLDDRDULLDDDLULURDRUUDDRRURDULULUURRDDLLLDLLUURRDRRRUULLDLDRRDULLDDRR"
+  },
+  {
+    "fingerprint": "########/##   # #/#   o~.#/#  r#* #/# ~|l~ #/#  r.l##/##    ##/########[[4,5],[[2,2],[5,2],[2,5]]]",
+    "solution": "URURULDDLLUUULDLDRRDRDDLLUULURDDDRRUURUULULDLLDDRDRRLLULUURDRDRDDLLURRURRUULRDDLLLLLURDDRRURRUULLULDLDRDRDDLLUUULURRRLDLDDR"
+  },
+  {
+    "fingerprint": "########/# #  # #/# .  ~ #/# r~#*.#/##~~r~|#/# ~o.~ #/##   ###/########[[3,6],[[2,2],[3,2],[2,5],[4,4]]]",
+    "solution": "URRUUULULDRRDDDLDLLUUULURRLDDDRURLLUURDDLDDRRURRUUULLRDDLRUULULDRRDDLDDLLUUDDRRUULRDDLLUURRRUULLDURRDDLLRDDLLURDRUULUULLDRURDDRDDLLUUUURRRRDDDLULLLDDRUDRURUDLLLURLUURDDRRRUULLLDDLDDRRURRULLLLDR"
   }
 ];

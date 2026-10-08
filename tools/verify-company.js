@@ -57,10 +57,10 @@ function boot(storage = new Map(), reduced = false, changeSolutions) {
     listeners.keyup({ key: k });
   };
   const play = solution => {
-    for (const k of solution) { advance(); press({ U: 'ArrowUp', R: 'ArrowRight', D: 'ArrowDown', L: 'ArrowLeft' }[k]); }
+    for (const k of solution) { advance(750); press({ U: 'ArrowUp', R: 'ArrowRight', D: 'ArrowDown', L: 'ArrowLeft' }[k]); }
     advance();
   };
-  const finish = () => { for (let i = 0; i < 300 && get('restart').disabled; i++) advance(); assert.equal(get('restart').disabled, false); advance(); };
+  const finish = () => { for (let i = 0; i < 800 && get('restart').disabled; i++) advance(); assert.equal(get('restart').disabled, false); advance(); };
   return { get, read, press, play, finish, advance, storage, document, solutions: sandbox.window.BlueBoxSolutions };
 }
 
@@ -168,28 +168,55 @@ for (let i = 0; i < sources.length; i++) {
   if (i > 0) { app.get('next').click(); app.play(app.solutions[i].solution); }
   const saved = app.read();
   assert.equal(app.get('progress').textContent, `${i + 1} / ${sources.length}`);
-  if (i === 7) {
-    // A real eight-room save must keep its records and inventory, and open room 9.
-    const legacy = { ...saved, current: 7, records: saved.records.slice(0, 8), bests: saved.bests.slice(0, 8), cleared: saved.cleared.slice(0, 8) };
+  if (i === 7 || i === 11) {
+    // Eight- and twelve-room saves keep their records and open the next chapter.
+    const legacyCount = i + 1;
+    const legacy = { ...saved, current: i, records: saved.records.slice(0, legacyCount), bests: saved.bests.slice(0, legacyCount), cleared: saved.cleared.slice(0, legacyCount) };
     const migrated = boot(new Map([[key, JSON.stringify(legacy)]]));
-    assert.equal(migrated.get('room-grid').children.length, 12);
-    assert.equal(migrated.get('progress').textContent, '8 / 12');
-    migrated.get('room-grid').children[7].click();
-    assert.equal(migrated.read().records.length, 12);
-    assert.deepEqual(migrated.read().records.slice(0, 8), legacy.records);
-    assert.deepEqual(migrated.read().bests.slice(0, 8), legacy.bests);
-    assert.deepEqual(migrated.read().cleared.slice(0, 8), legacy.cleared);
+    assert.equal(migrated.get('room-grid').children.length, sources.length);
+    assert.equal(migrated.get('progress').textContent, `${legacyCount} / ${sources.length}`);
+    migrated.get('room-grid').children[i].click();
+    assert.equal(migrated.read().records.length, sources.length);
+    assert.deepEqual(migrated.read().records.slice(0, legacyCount), legacy.records);
+    assert.deepEqual(migrated.read().bests.slice(0, legacyCount), legacy.bests);
+    assert.deepEqual(migrated.read().cleared.slice(0, legacyCount), legacy.cleared);
     assert.equal(migrated.read().ppaCount, legacy.ppaCount);
-    assert.equal(migrated.get('room-grid').children[8].disabled, false);
-    assert.equal(migrated.get('room-grid').children[9].disabled, true);
+    assert.equal(migrated.get('room-grid').children[legacyCount].disabled, false);
+    assert.equal(migrated.get('room-grid').children[legacyCount + 1].disabled, true);
     assert.match(migrated.get('next').innerHTML, /下一個房間/);
     migrated.press('Enter');
-    assert.equal(migrated.read().current, 8, 'The old final-room save continues into room 9.');
-    assert.deepEqual(migrated.read().records[8].state, E.parseLevel(sources[8]).initial);
+    assert.equal(migrated.read().current, legacyCount, 'The old final-room save continues into the next room.');
+    assert.deepEqual(migrated.read().records[legacyCount].state, E.parseLevel(sources[legacyCount]).initial);
+  }
+  if (i >= 12) {
+    const curveTest = boot(new Map([[key, JSON.stringify(saved)]])); curveTest.get('restart').click();
+    const level = E.parseLevel(sources[i]); let state = E.copy(level.initial), checkedCurve = false;
+    for (const moveKey of curveTest.solutions[i].solution) {
+      const moved = E.move(level, state, E.DIRS.findIndex(d => d.key === moveKey));
+      const before = curveTest.read().records[i]; curveTest.play(moveKey);
+      if (moved.path.some((pos, j, route) => j > 0 && j < route.length - 1 && pos - route[j - 1] !== route[j + 1] - pos)) {
+        curveTest.get('undo').click();
+        const restored = curveTest.read().records[i];
+        assert.deepEqual(restored.state, before.state, 'Undo reverses the whole curved route in one action.');
+        assert.equal(restored.steps, before.steps); assert.equal(restored.pushes, before.pushes);
+        checkedCurve = true; break;
+      }
+      state = moved.state;
+    }
+    assert.ok(checkedCurve, `Room ${i + 1} must exercise undo on an actual bend.`);
   }
   for (const reduced of [false, true]) {
-    const copy = new Map([[key, JSON.stringify(saved)]]), test = boot(copy, reduced);
-    test.get('restart').click(); test.get('ppa-use').click(); test.finish();
+    const copy = new Map([[key, JSON.stringify(saved)]]); let test = boot(copy, reduced);
+    test.get('restart').click(); test.get('ppa-use').click();
+    if (i === lastRoom) {
+      for (let frame = 0; frame < 30; frame++) test.advance();
+      const partial = test.read();
+      assert.ok(partial.records[i].steps > 0 && partial.records[i].steps < test.solutions[i].solution.length);
+      test = boot(copy, reduced);
+      assert.deepEqual(test.read().records[i].state, partial.records[i].state, 'Refreshing the curved boss playback preserves its current board.');
+      assert.equal(test.read().ppaCount, saved.ppaCount - 1, 'Resuming the new boss consumes no second item.');
+    }
+    test.finish();
     const result = test.read();
     assert.ok(E.won(E.parseLevel(sources[i]), result.records[i].state), `PPA must solve room ${i + 1}.`);
     assert.equal(result.ppaCount, saved.ppaCount - 1);
@@ -202,7 +229,7 @@ app.press('Enter');
 assert.equal(app.read().current, lastRoom, 'Replay also stays in the final room.');
 assert.equal(app.read().records[lastRoom].steps, 0);
 app.play(app.solutions[lastRoom].solution);
-assert.match(app.get('completion-detail').textContent, /12 \/ 12/);
+assert.ok(app.get('completion-detail').textContent.includes(`${sources.length} / ${sources.length}`));
 app.press('Enter');
 assert.equal(app.read().current, 0, 'The final room default choice returns to the first room.');
 
@@ -216,4 +243,4 @@ const interrupted = boot(); interrupted.get('ppa-use').click(); interrupted.adva
 const recovered = boot(interrupted.storage, false, entries => { entries[0].fingerprint = 'outdated'; });
 assert.equal(recovered.read().ppaCount, 3, 'Invalid interrupted solution refunds the item.');
 assert.equal(recovered.get('restart').disabled, false);
-console.log('PASS: Completion arrows/WASD, Enter, focus, repeat protection, completed-room reopen/restore, final-room choices, touch press/hold/release/cancel, multiple pointers, mobile actions/panel, twelve animated PPA solutions, eight-room save migration, reduced motion, input lock, reset, refresh resume, inventory, manual rewards, undo protection, replay, bests, original save isolation, empty inventory and invalid-solution recovery.');
+console.log('PASS: Completion navigation, touch controls, mobile panel, sixteen PPA solutions, eight- and twelve-room save migration, curved-route undo, reduced motion, input lock, refresh resume, inventory, manual rewards, replay, bests, original save isolation and invalid-solution recovery.');

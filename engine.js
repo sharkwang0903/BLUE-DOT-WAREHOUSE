@@ -49,7 +49,8 @@
   function passable(level, pos, open) {
     return pos >= 0 && level.tiles[pos] !== '#' && (level.tiles[pos] !== '|' || open);
   }
-  function isIce(level, pos) { return level.tiles[pos] === '~' || level.tiles[pos] === '*'; }
+  function turnAt(level, pos) { return level.tiles[pos] === 'r' ? 1 : level.tiles[pos] === 'l' ? -1 : 0; }
+  function isIce(level, pos) { return level.tiles[pos] === '~' || level.tiles[pos] === '*' || turnAt(level, pos) !== 0; }
   function won(level, state) { return level.goals.every(pos => state.boxes.includes(pos)); }
   function copy(state) { return { player: state.player, boxes: [...state.boxes] }; }
 
@@ -67,15 +68,27 @@
     let destination = neighbor(level, next, dir);
     if (!passable(level, destination, gatesOpen(level, remaining)) || remaining.includes(destination)) return null;
     const path = [next, destination];
+    let slideDir = dir, turns = 0;
+    const slidingStates = new Set();
     while (isIce(level, destination)) {
-      const ahead = neighbor(level, destination, dir);
+      const key = `${destination}:${slideDir.x},${slideDir.y}`;
+      // A closed skating loop has no landing; reject the entire push atomically.
+      if (slidingStates.has(key)) return null;
+      slidingStates.add(key);
+      const turn = turnAt(level, destination);
+      if (turn) {
+        slideDir = turn > 0 ? { x: -slideDir.y, y: slideDir.x } : { x: slideDir.y, y: -slideDir.x };
+        turns++;
+      }
+      const ahead = neighbor(level, destination, slideDir);
       const interim = [...remaining, destination];
-      if (!passable(level, ahead, gatesOpen(level, interim)) || remaining.includes(ahead) || ahead === state.player) break;
+      // The player now stands in the box's old square, including on curved paths.
+      if (!passable(level, ahead, gatesOpen(level, interim)) || remaining.includes(ahead) || ahead === next) break;
       destination = ahead;
       path.push(destination);
     }
     const boxes = [...remaining, destination].sort((a, b) => a - b);
-    return { state: { player: next, boxes }, pushed: true, path, from: next, to: destination };
+    return { state: { player: next, boxes }, pushed: true, path, from: next, to: destination, turns, slideDir };
   }
 
   function reachable(level, state) {
@@ -95,5 +108,5 @@
   function stateKey(level, state) {
     return state.boxes.join(',') + ':' + Math.min(...reachable(level, state));
   }
-  return Object.freeze({ DIRS, parseLevel, neighbor, gatesOpen, passable, isIce, won, copy, move, reachable, stateKey });
+  return Object.freeze({ DIRS, parseLevel, neighbor, gatesOpen, passable, isIce, turnAt, won, copy, move, reachable, stateKey });
 });
